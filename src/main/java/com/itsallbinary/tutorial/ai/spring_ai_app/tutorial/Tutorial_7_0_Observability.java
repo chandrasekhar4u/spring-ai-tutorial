@@ -15,6 +15,7 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.metadata.Usage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.document.Document;
@@ -108,6 +109,10 @@ public class Tutorial_7_0_Observability {
 
         ChatResponse chatResponse = responseSpec.chatResponse();
         finalOutputToUi = finalOutputToUi + CommonHelper.surroundMessageSection("chatResponse", prettyPrint(chatResponse));
+
+        Usage usage = chatResponse.getMetadata().getUsage();
+        finalOutputToUi = finalOutputToUi + CommonHelper.surroundMessageSection("usage", prettyPrint(usage));
+
 
         String aIResponse = responseSpec
                 .content();
