@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class InMemoryEmbeddingModel implements EmbeddingModel {
-    private static final Logger logger = LoggerFactory.getLogger(InMemoryEmbeddingModel.class);
+public class LocalEmbeddingModel implements EmbeddingModel {
+    private static final Logger logger = LoggerFactory.getLogger(LocalEmbeddingModel.class);
     private static final int VECTOR_SIZE = 10; // Fixed-size embedding vector
 
     @Override

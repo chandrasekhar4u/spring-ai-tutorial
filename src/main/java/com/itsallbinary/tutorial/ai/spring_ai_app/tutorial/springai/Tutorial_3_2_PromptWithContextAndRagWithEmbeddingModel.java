@@ -1,13 +1,13 @@
-package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial;
+package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
-import com.itsallbinary.tutorial.ai.spring_ai_app.experiments.InMemoryEmbeddingModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise {
+public class Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel {
 
     private final ChatClient chatClient;
 
@@ -37,15 +37,16 @@ public class Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise {
 			""";
 
 
-    public Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise(
-            @Qualifier("openAiChatModel") ChatModel openAiChatModel) {
+    public Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel(
+            @Qualifier("openAiChatModel") ChatModel openAiChatModel,
+            OpenAiEmbeddingModel openAiEmbeddingModel) {
 
         ChatClient.Builder chatClientBuilder = ChatClient.builder(openAiChatModel);
 
         /**
-         * In memory Vector database
+         * In memory Vector database with OpenAI embedding model
          */
-        SimpleVectorStore vectorStore = SimpleVectorStore.builder(new InMemoryEmbeddingModel()).build();
+        SimpleVectorStore vectorStore = SimpleVectorStore.builder(openAiEmbeddingModel).build();
         // MySpaceCompany internal knowledge
         List<Document> documents = List.of(
                 new Document("MySpaceCompany is planning to send a satellite to Jupiter in 2030.", Map.of("planet", "Jupiter")),
@@ -70,7 +71,7 @@ public class Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise {
                 .build();
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "tutorial/3.1")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/3.2")
     String generation(String userInput) {
 
         String aIResponse = this.chatClient.prompt()

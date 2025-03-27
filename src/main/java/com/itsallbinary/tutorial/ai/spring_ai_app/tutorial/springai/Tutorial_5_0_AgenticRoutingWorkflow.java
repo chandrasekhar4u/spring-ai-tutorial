@@ -1,27 +1,14 @@
-package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial;
+package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
-import com.itsallbinary.tutorial.ai.spring_ai_app.experiments.InMemoryEmbeddingModel;
-import groovy.util.logging.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
-import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 public class Tutorial_5_0_AgenticRoutingWorkflow {
@@ -47,7 +34,7 @@ public class Tutorial_5_0_AgenticRoutingWorkflow {
                 .build();
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "tutorial/5")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/5")
     String generation(String userInput) {
 
         String route = this.chatClient.prompt()

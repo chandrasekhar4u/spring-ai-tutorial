@@ -1,4 +1,4 @@
-package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial;
+package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CustomChatModel;
@@ -29,7 +29,7 @@ public class Tutorial_8_0_CustomModel_PromptWithContext {
                 .build();
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "tutorial/8")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/8")
     String generation(String userInput) {
 
         String aIResponse = this.chatClient.prompt()

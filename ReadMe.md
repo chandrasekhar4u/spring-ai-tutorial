@@ -32,19 +32,44 @@
 - Simple single prompt input & single output
 - No memory
 - PROMPT = user input
+- Try
+  - Langchain4j - Try adding system instructions
+
+http://localhost:8080/ai/spring/tutorial/1?userInput=which planet is biggest in solar system
+http://localhost:8080/ai/spring/tutorial/1?userInput=how many moons does it have
+
+http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which planet is biggest in solar system
+http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how many moons does it have
 
 ## Tutorial_1_1_SimplePromptAndSystemPrompt
 - Add system instructions either at client level or at each prompt.
 - PROMPT = user input + system prompt
+- Try:
+  - Change system instructions to specify format of output you want like json or yaml or anything that you wish.
+
+http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest in solar system
 
 ## Tutorial_2_PromptWithContext
 - Add memory so that previous context can be retained & passed to LLM with every prompt.
 - PROMPT = user input + Prior questions & answers
+- Try
+  - Make memory separate my user (Hint: conversation id)
+
+http://localhost:8080/ai/spring/tutorial/2?userInput=which planet is biggest in solar system
+http://localhost:8080/ai/spring/tutorial/2?userInput=how many moons does it have
+http://localhost:8080/ai/spring/tutorial/2?userInput=name all moons
+
+http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which planet is biggest in solar system
+http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how many moons does it have
+http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name all moons
 
 ## Tutorial_3_0_PromptWithContextAndRag
 - Add RAG so that it can use knowledge internal to organization.
 - Similarity matched vector data will be sent with the prompt.
 - PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise
+  
+http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter
+http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system
 
 ## Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise
 - Custom advise about how to use RAG data
@@ -52,6 +77,8 @@
 
 ## Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel
 - Use OpenAI embedding model to generate embeddings
+- Try
+  - Use embedding model to even generate embeddings of use prompt & then search for similarity.
 
 ## Tutorial_4_0_PromptWithContextRagAndTools
 - Add 'Tools' so that actions can be performed.
@@ -62,6 +89,9 @@
 - TOOL - Execute tool, get response & call LLM again
 - CALL 2 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
 - CALL 2 RESPONSE = final response which can be give back to user
+
+http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system
+http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet
 
 ## Tutorial_5_0_AgenticRoutingWorkflow
 - The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input.
@@ -81,3 +111,4 @@
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
 https://spring.io/blog/2025/01/21/spring-ai-agentic-patterns
+https://docs.langchain4j.dev/get-started

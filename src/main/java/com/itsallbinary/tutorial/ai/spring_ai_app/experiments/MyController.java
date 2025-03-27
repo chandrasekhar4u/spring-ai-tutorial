@@ -10,7 +10,6 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +40,7 @@ public class MyController {
 //
 //        // Initialize SimpleVectorStore
 
-        SimpleVectorStore vectorStore = SimpleVectorStore.builder(new InMemoryEmbeddingModel()).build();
+        SimpleVectorStore vectorStore = SimpleVectorStore.builder(new LocalEmbeddingModel()).build();
 //        SimpleVectorStore vectorStore = SimpleVectorStore.builder(openAiEmbeddingModel).build();
 
 
@@ -67,7 +66,7 @@ public class MyController {
 
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "experiment")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_EXPERIMENTS + "experiment")
     String generation(String userInput) {
         return this.chatClient.prompt()
                 .user(userInput)

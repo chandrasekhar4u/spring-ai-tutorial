@@ -1,7 +1,7 @@
-package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial;
+package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
-import com.itsallbinary.tutorial.ai.spring_ai_app.experiments.InMemoryEmbeddingModel;
+import com.itsallbinary.tutorial.ai.spring_ai_app.experiments.LocalEmbeddingModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
@@ -29,7 +29,7 @@ public class Tutorial_3_0_PromptWithContextAndRag {
         /**
          * In memory Vector database
          */
-        SimpleVectorStore vectorStore = SimpleVectorStore.builder(new InMemoryEmbeddingModel()).build();
+        SimpleVectorStore vectorStore = SimpleVectorStore.builder(new LocalEmbeddingModel()).build();
         // MySpaceCompany internal knowledge
         List<Document> documents = List.of(
                 new Document("MySpaceCompany is planning to send a satellite to Jupiter in 2030.", Map.of("planet", "Jupiter")),
@@ -50,7 +50,7 @@ public class Tutorial_3_0_PromptWithContextAndRag {
                 .build();
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "tutorial/3")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/3")
     String generation(String userInput) {
 
         String aIResponse = this.chatClient.prompt()

@@ -1,4 +1,4 @@
-package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial;
+package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
 import org.springframework.ai.chat.client.ChatClient;
@@ -12,6 +12,7 @@ public class Tutorial_1_1_SimplePromptAndSystemPrompt {
 
     public static final String SYSTEM_PROMPT = "You are a philosopher. After every response, " +
             "add a philosophical line in the end of response.";
+
     private final ChatClient chatClient;
 
 
@@ -29,7 +30,7 @@ public class Tutorial_1_1_SimplePromptAndSystemPrompt {
                 .build();
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "tutorial/1.1")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/1.1")
     String generation(String userInput) {
 
         String aIResponse = this.chatClient.prompt()

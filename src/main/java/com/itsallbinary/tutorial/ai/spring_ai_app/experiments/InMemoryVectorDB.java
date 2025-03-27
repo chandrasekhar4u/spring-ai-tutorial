@@ -1,3 +1,4 @@
+/*
 package com.itsallbinary.tutorial.ai.spring_ai_app.experiments;
 
 import java.util.*;
@@ -61,3 +62,4 @@ public class InMemoryVectorDB {
         System.out.println("Best match for '" + query + "': " + db.search(query));
     }
 }
+*/

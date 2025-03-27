@@ -1,7 +1,6 @@
-package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial;
+package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -41,7 +40,7 @@ public class Tutorial_6_0_AgenticEvaluatorOptimizer {
                 .build();
     }
 
-    @GetMapping(CommonHelper.URL_PREFIX + "tutorial/6")
+    @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/6")
     String generation(String userInput) {
 
         String finalOutputToUi = "";
