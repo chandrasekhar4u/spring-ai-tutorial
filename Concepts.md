@@ -17,6 +17,10 @@
 - OpenAI usage & budget in their online dashboard
 - OpenAI API specification
 - Terminal logs to see the data flow.
+  
+
+> [!NOTE]
+> Explain pre-steps in ReadMe. Also verify local setup.
 
 ## Prompts
 
@@ -26,15 +30,23 @@
     - The LLM processes this prompt to generate a relevant response.
     - **Use case:** Ask the model for information or specific tasks, like querying a database or generating a summary.
 
+> [!NOTE]
+> Go to tutorial 1
 
 
-- **System Prompt:**
+- **Chain of commands:**
+    - Reference https://cdn.openai.com/spec/model-spec-2024-05-08.html#follow-the-chain-of-command
+    - Ordering of priorities - Platform (LLM Model) > Developer (System prompt) > User (User prompt) > Tool
+
+- **System Prompt / Developer prompt:**
     - **Definition:** A **System Prompt** is an instruction or context given to the LLM to guide how it should respond to user inputs.
+    - Reference: https://platform.openai.com/docs/guides/prompt-engineering
     - **Example:** “You are an expert in Java programming.”
     - This helps set the tone, style, or specific behavior of the LLM when it processes user inputs.
     - **Use case:** Set a role, persona, or behavior for the LLM (e.g., making it more formal, casual, or technical).
  
-
+> [!NOTE]
+> Go to tutorial 1.1
 
 - **Why Use System Prompts?**
   - System prompts help control how the LLM responds—whether it should be formal, informal, technical, or conversational.
