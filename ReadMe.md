@@ -154,7 +154,7 @@ sequenceDiagram
     LLM->>User: Generate Response
 ```
 
-## Tutorial_4_0_PromptWithContextRagAndTools
+## Tutorial_4_0_PromptWithContextRagAndTools (Agentic AI)
 - Add 'Tools' so that actions can be performed.
 - LLM can't perform action but it can decide & instruct back to execute action along with inputs for action.
 - Spring generates schema for input to the tool
@@ -163,6 +163,30 @@ sequenceDiagram
 - TOOL - Execute tool, get response & call LLM again
 - CALL 2 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
 - CALL 2 RESPONSE = final response which can be give back to user
+
+
+Here’s the corrected sequence for the **PlanStatusServiceTool** usage in the two-step process:
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant PlanStatusServiceTool as PlanStatusServiceTool (@Tool)
+    participant MySpaceCompany as MySpaceCompany API
+    participant LLM    
+    
+
+    User->>SpringApp: Send Prompt (Request Plan Status)
+    SpringApp->>LLM: Send Request with Tool Definition (PlanStatusServiceTool)
+    LLM->>SpringApp: Send Tool Name & Input Parameters (Fetch Plan Status)
+    SpringApp->>PlanStatusServiceTool: Execute Tool with Input Parameters
+    PlanStatusServiceTool->>MySpaceCompany: Fetch Plan Status (Satellite to Planets)
+    MySpaceCompany->>PlanStatusServiceTool: Return Plan Status Data
+    PlanStatusServiceTool->>SpringApp: Return Plan Status Data
+    SpringApp->>LLM: Send Tool Call Result (Plan Status Data)
+    LLM->>SpringApp: Generate Final Response with Tool Result
+    SpringApp->>User: Provide Response with Plan Status Information
+```
 
 http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system
 http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet
