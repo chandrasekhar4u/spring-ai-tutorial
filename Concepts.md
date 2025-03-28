@@ -136,7 +136,8 @@
   
 - **Compliance with Regulations**:  
   Helps meet legal and ethical standards regarding user-generated content.
-  
+
+Reference: https://platform.openai.com/docs/guides/moderation
 
 ## Agentic AI
 
