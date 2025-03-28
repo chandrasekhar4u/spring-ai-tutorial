@@ -204,7 +204,10 @@ http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this pla
 
 ## Tutorial_8_0_CustomModel_PromptWithContext.java
 - For private or in-house models, create custom model implementation with defined APIs
-- Spring AI will provide all the functionalities like m=context memory, RAG integration tc. 
+- Spring AI will provide all the functionalities like m=context memory, RAG integration tc.
+
+## Tutorial_9_0_Moderation
+
 
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
