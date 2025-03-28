@@ -45,13 +45,13 @@
     - **Example:** “You are an expert in Java programming.”
     - This helps set the tone, style, or specific behavior of the LLM when it processes user inputs.
     - **Use case:** Set a role, persona, or behavior for the LLM (e.g., making it more formal, casual, or technical).
- 
-> [!NOTE]
-> Go to tutorial 1.1
 
 - **Why Use System Prompts?**
   - System prompts help control how the LLM responds—whether it should be formal, informal, technical, or conversational.
   - They provide additional context that can improve the quality of the response.
+
+> [!NOTE]
+> Go to tutorial 1.1
 
 ## Context Memory
 
@@ -76,7 +76,8 @@
   - **Limit the context size**: LLMs may have a token limit, so manage how much past context you store and send with each prompt.
   - Consider **expiration** of context: Older context may become irrelevant over time, so decide when to discard or refresh memory.
 
-
+> [!NOTE]
+> Go to tutorial 2
 
 ## RAG
 
@@ -101,6 +102,8 @@
   - **Token Limitations:** Large data sets might exceed the model's token limit. Make sure to properly manage the amount of data you send to the model.
   - **Data Freshness:** Regularly update internal data sources to avoid relying on outdated or irrelevant information for generating responses.
 
+> [!NOTE]
+> Go to tutorial 3
 
 ## Agentic AI
 
