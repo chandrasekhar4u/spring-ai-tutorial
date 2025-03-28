@@ -15,6 +15,17 @@
 - PROMPT = user input
 - Try
   - Langchain4j - Try adding system instructions
+ 
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant LLM
+
+    User->>SpringApp: Send Prompt
+    SpringApp->>LLM: Pass Prompt
+    LLM->>User: Generate Response
+```
 
 http://localhost:8080/ai/spring/tutorial/1?userInput=which planet is biggest in solar system
 http://localhost:8080/ai/spring/tutorial/1?userInput=how many moons does it have
@@ -28,6 +39,18 @@ http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how many moons does it
 - Try:
   - Change system instructions to specify format of output you want like json or yaml or anything that you wish.
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant LLM
+
+    User->>SpringApp: Send Prompt
+    SpringApp->>SpringApp: Add System Prompt & User Prompt
+    SpringApp->>LLM: Pass Combined Prompt
+    LLM->>User: Generate Response
+```
+
 http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest in solar system
 
 ## Tutorial_2_PromptWithContext
@@ -35,6 +58,24 @@ http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest i
 - PROMPT = user input + Prior questions & answers
 - Try
   - Make memory separate my user (Hint: conversation id)
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant Memory
+    participant LLM
+
+    User->>SpringApp: Send Prompt
+    SpringApp->>LLM: Pass Prompt
+    LLM->>SpringApp: Generate Response
+    SpringApp->>Memory: Store Prompt & Response
+    
+    User->>SpringApp: Send New Prompt
+    SpringApp->>Memory: Retrieve Stored Memory
+    SpringApp->>LLM: Combine Stored Memory + New Prompt
+    LLM->>User: Generate Response
+```
 
 http://localhost:8080/ai/spring/tutorial/2?userInput=which planet is biggest in solar system
 http://localhost:8080/ai/spring/tutorial/2?userInput=how many moons does it have
@@ -48,7 +89,32 @@ http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name all moons
 - Add RAG so that it can use knowledge internal to organization.
 - Similarity matched vector data will be sent with the prompt.
 - PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise
-  
+
+```mermaid
+sequenceDiagram
+    participant SpringApp as Spring Application
+    participant SimpleVectorStore as SimpleVectorStore (In-memory)
+    
+    SpringApp->>SpringApp: Convert Internal Knowledge to Chunks
+    SpringApp->>SpringApp: Generate Embeddings for Chunks (Custom Logic)
+    SpringApp->>SimpleVectorStore: Store Embeddings in SimpleVectorStore
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant SimpleVectorStore as SimpleVectorStore (In-memory)
+    participant LLM    
+
+    User->>SpringApp: Send Prompt
+    SpringApp->>SpringApp: Convert User Prompt to Embedding (Custom Logic)
+    SpringApp->>SimpleVectorStore: Retrieve Relevant Data
+    SpringApp->>SpringApp: Augment Retrieved Data
+    SpringApp->>LLM: Combine Data with Prompt
+    LLM->>User: Generate Response
+```
+
 http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter
 http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system
 
@@ -60,6 +126,33 @@ http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is bigges
 - Use OpenAI embedding model to generate embeddings
 - Try
   - Use embedding model to even generate embeddings of use prompt & then search for similarity.
+
+```mermaid
+sequenceDiagram
+    participant SpringApp as Spring Application
+    participant VectorDB as Vector Database
+    participant EmbeddingModel as Embedding Model
+
+    SpringApp->>SpringApp: Convert Internal Knowledge to Chunks
+    SpringApp->>EmbeddingModel: Generate Embeddings for Chunks
+    SpringApp->>VectorDB: Store Embeddings in Vector Database
+
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant LLM
+    participant VectorDB as Vector Database
+    participant EmbeddingModel as Embedding Model
+
+    User->>SpringApp: Send Prompt
+    SpringApp->>EmbeddingModel: Convert User Prompt to Embedding
+    SpringApp->>VectorDB: Retrieve Relevant Data
+    SpringApp->>SpringApp: Augment Retrieved Data
+    SpringApp->>LLM: Combine Data with Prompt
+    LLM->>User: Generate Response
+```
 
 ## Tutorial_4_0_PromptWithContextRagAndTools
 - Add 'Tools' so that actions can be performed.
