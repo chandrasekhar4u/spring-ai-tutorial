@@ -53,6 +53,23 @@
 > [!NOTE]
 > Go to tutorial 1.1
 
+## Prompt Caching
+
+### **Why Use Prompt Caching?**
+- **Faster Responses**:  
+  Reusing previously cached responses reduces the need to recompute answers, leading to faster response times.  
+- **Reduce Redundancy**:  
+  Avoids repeating the same calculations for identical or similar inputs.  
+- **Cost-Efficient**:  
+  Saves processing power and API usage by reusing cached results instead of recalculating them each time.
+
+> [!TIP]
+> To realize caching benefits, place static content like instructions and examples at the beginning of your prompt, and put variable content, such as user-specific information, at the end. https://platform.openai.com/docs/guides/prompt-caching#structuring-prompts
+
+- For Spring & Langchain4j feature not yet implemented
+- https://github.com/spring-projects/spring-ai/issues/1403
+- https://github.com/langchain4j/langchain4j/issues/1591
+
 ## Context Memory
 
 - **What is Context Memory?**
@@ -104,6 +121,22 @@
 
 > [!NOTE]
 > Go to tutorial 3
+
+## **What is LLM Moderation?**
+
+- **Definition**:  
+  **LLM Moderation** involves using Large Language Models (LLMs) to **flag** and **score** harmful, inappropriate, or offensive content in user inputs and AI-generated outputs, rather than directly filtering or blocking content.
+
+### **Why is LLM Moderation Important?**
+- **Flag Harmful Content**:  
+  Flags content that may be inappropriate, offensive, or harmful, allowing further review or action to be taken.
+  
+- **Ensure Safe User Interaction**:  
+  Provides an additional layer of protection by identifying unsafe or damaging content before it reaches the user.
+  
+- **Compliance with Regulations**:  
+  Helps meet legal and ethical standards regarding user-generated content.
+  
 
 ## Agentic AI
 
