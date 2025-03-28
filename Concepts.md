@@ -34,7 +34,8 @@
 > Go to tutorial 1
 
 
-- **Chain of commands:**
+- **Model Spec & Chain of commands:**
+    - Reference https://openai.com/index/introducing-the-model-spec/
     - Reference https://cdn.openai.com/spec/model-spec-2024-05-08.html#follow-the-chain-of-command
     - Ordering of priorities - Platform (LLM Model) > Developer (System prompt) > User (User prompt) > Tool
 
