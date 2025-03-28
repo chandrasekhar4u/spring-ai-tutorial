@@ -1,22 +1,3 @@
-# LLM
-
-## LLM Restrictions
-- No knowledge other than public data used to train it
-- Knowledge till the time of training, not latest 
-- No memory
-- No real world connection or realtime data
-- Can't perform action
-- Non-deterministic 
-- Less predictable
-
-## LLM considerations
-- Cost by tokens in input & output. Optimize prompts. Restrict inputs.
-- Not inherently secure. Watch what flows to LLM.
-
-## To show
-- OpenAI usage & budget in their online dashboard
-- OpenAI API specification
-- Terminal logs to see the data flow.
 
 # Tutorials
 
