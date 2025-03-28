@@ -14,8 +14,8 @@
 - Not inherently secure. Watch what flows to LLM.
 
 ## To show
-- OpenAI usage & budget in their online dashboard
-- OpenAI API specification
+- OpenAI usage & budget in their online dashboard - https://platform.openai.com/settings/organization/usage
+- OpenAI API specification - https://platform.openai.com/docs/api-reference/introduction
 - Terminal logs to see the data flow.
   
 
