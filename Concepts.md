@@ -21,6 +21,7 @@
 
 > [!NOTE]
 > Explain pre-steps in ReadMe. Also verify local setup.
+> [Pre Steps](./ReadMe.md#tutorial_1_0_simpleprompt)
 
 ## Prompts
 
