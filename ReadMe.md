@@ -10,12 +10,13 @@
 - Sprig auto discovers & create ChatModel beans for configured models.
 
 ## Tutorial_1_0_SimplePrompt
+
+### Highlights
 - Simple single prompt input & single output
 - No memory
 - PROMPT = user input
-- Try
-  - Langchain4j - Try adding system instructions
- 
+
+### Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant User
@@ -26,19 +27,25 @@ sequenceDiagram
     SpringApp->>LLM: Pass Prompt
     LLM->>User: Generate Response
 ```
+### Test
+#### Spring
+[http://localhost:8080/ai/spring/tutorial/1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+[http://localhost:8080/ai/spring/tutorial/1?userInput=how many moons does it have](http://localhost:8080/ai/spring/tutorial/1?userInput=how%20many%20moons%20does%20it%20have) --> Does not remeber past conversation.  
+#### Langchain4j
+[http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)
+[http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how many moons does it have](http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how%20many%20moons%20does%20it%20have) --> Does not remeber past conversation.  
 
-http://localhost:8080/ai/spring/tutorial/1?userInput=which planet is biggest in solar system
-http://localhost:8080/ai/spring/tutorial/1?userInput=how many moons does it have
 
-http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which planet is biggest in solar system
-http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how many moons does it have
+### Try on your own
+  - Try different prompts
 
 ## Tutorial_1_1_SimplePromptAndSystemPrompt
+
+### Highlights
 - Add system instructions either at client level or at each prompt.
 - PROMPT = user input + system prompt
-- Try:
-  - Change system instructions to specify format of output you want like json or yaml or anything that you wish.
 
+### Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant User
@@ -51,24 +58,39 @@ sequenceDiagram
     LLM->>User: Generate Response
 ```
 
-http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest in solar system
+### Test
+[http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/1.1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)
 
+
+### Try on your own
+  - Change system instructions to specify format of output you want like json or yaml or anything that you wish.
+  - Langchain4j - Try adding system instructions
+  
 ## Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations
-- Control different configurations of LLM to control generation.
-- Try:
-  - Add more configurations & try out hwo they control genration.
 
-http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1
-http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.8
-http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.9
-http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.1
+### Highlights
+- Control different configurations of LLM to control generation.
+
+### Test
+[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1)\
+[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.8](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.8)\
+[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&topP=0.9](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.9)\
+[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&topP=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.1)
+
+
+### Try on your own
+  - Try changing values of configurations
+  - Add more code for other configurations & try out hwo they control genration.
+  
 
 ## Tutorial_2_PromptWithContext
+
+### Highlights
 - Add memory so that previous context can be retained & passed to LLM with every prompt.
 - PROMPT = user input + Prior questions & answers
-- Try
-  - Make memory separate my user (Hint: conversation id)
 
+
+### Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant User
@@ -87,19 +109,26 @@ sequenceDiagram
     LLM->>User: Generate Response
 ```
 
-http://localhost:8080/ai/spring/tutorial/2?userInput=which planet is biggest in solar system
-http://localhost:8080/ai/spring/tutorial/2?userInput=how many moons does it have
-http://localhost:8080/ai/spring/tutorial/2?userInput=name all moons
+### Test
+[http://localhost:8080/ai/spring/tutorial/2?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/2?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+[http://localhost:8080/ai/spring/tutorial/2?userInput=how many moons does it have](http://localhost:8080/ai/spring/tutorial/2?userInput=how%20many%20moons%20does%20it%20have)\
+[http://localhost:8080/ai/spring/tutorial/2?userInput=name all moons](http://localhost:8080/ai/spring/tutorial/2?userInput=name%20all%20moons)\
+[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how many moons does it have](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how%20many%20moons%20does%20it%20have)\
+[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name all moons](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name%20all%20moons)\
 
-http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which planet is biggest in solar system
-http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how many moons does it have
-http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name all moons
 
+### Try on your own
+  - Make memory separate my user (Hint: conversation id)
+  
 ## Tutorial_3_0_PromptWithContextAndRag
+
+### Highlights
 - Add RAG so that it can use knowledge internal to organization.
 - Similarity matched vector data will be sent with the prompt.
 - PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise
 
+### Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant SpringApp as Spring Application
@@ -125,18 +154,29 @@ sequenceDiagram
     LLM->>User: Generate Response
 ```
 
-http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter
-http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system
+### Test
+[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter)\
+[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+
+
+### Try on your own
+  -
+  
 
 ## Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise
+
+### Highlights
 - Custom advise about how to use RAG data
 - PROMPT = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
 ## Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel
+
+### Highlights
 - Use OpenAI embedding model to generate embeddings
 - Try
   - Use embedding model to even generate embeddings of use prompt & then search for similarity.
 
+### Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant SpringApp as Spring Application
@@ -165,6 +205,8 @@ sequenceDiagram
 ```
 
 ## Tutorial_4_0_PromptWithContextRagAndTools (Agentic AI)
+
+### Highlights
 - Add 'Tools' so that actions can be performed.
 - LLM can't perform action but it can decide & instruct back to execute action along with inputs for action.
 - Spring generates schema for input to the tool
@@ -174,9 +216,7 @@ sequenceDiagram
 - CALL 2 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
 - CALL 2 RESPONSE = final response which can be give back to user
 
-
-Here’s the corrected sequence for the **PlanStatusServiceTool** usage in the two-step process:
-
+### Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant User
@@ -198,26 +238,51 @@ sequenceDiagram
     SpringApp->>User: Provide Response with Plan Status Information
 ```
 
-http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system
-http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet
+### Test
+[http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+[http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any%20plans%20for%20this%20planet)\
+
+
+### Try on your own
+  -
+  
 
 ## Tutorial_5_0_AgenticRoutingWorkflow
+
+### Highlights
 - The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input.
 
+### Test
+
 ## Tutorial_6_0_AgenticEvaluatorOptimizer
+
+### Highlights
 - The Evaluator-Optimizer pattern implements a dual-LLM process where one model generates responses while another provides evaluation and feedback in an iterative loop, similar to a human writer's refinement process
 - Use multiple models to review & optimize inputs
 
+### Test
+
 ## Tutorial_7_0_Observability.java
+
+### Highlights
 - Add logger to log request responses
 - Inspect (or log) usage like tokens etc.
 
+### Test
+
 ## Tutorial_8_0_CustomModel_PromptWithContext.java
+
+### Highlights
 - For private or in-house models, create custom model implementation with defined APIs
 - Spring AI will provide all the functionalities like m=context memory, RAG integration tc.
 
+### Test
+
 ## Tutorial_9_0_Moderation
 
+### Highlights
+
+### Test
 
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
