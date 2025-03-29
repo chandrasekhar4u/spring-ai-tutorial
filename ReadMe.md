@@ -10,7 +10,9 @@
 - Sprig auto discovers & create ChatModel beans for configured models.
 
 ## Tutorial_1_0_SimplePrompt
-
+> [!NOTE]
+> Explain pre-steps in ReadMe. Also verify local setup.
+> [Explain concepts](./Concepts.md#prompts)
 ### Highlights
 - Simple single prompt input & single output
 - No memory
