@@ -53,6 +53,103 @@
 > [!NOTE]
 > Go to tutorial 1.1
 
+# Common LLM API Configuration Fields (OpenAI, Claude, Gemini, LLaMA, etc.)
+
+When calling an **LLM (Large Language Model) API**, you send a request with configuration fields that control the model’s response. These fields are **mostly shared** across models like OpenAI (GPT), Anthropic Claude, Google Gemini, and Meta LLaMA.
+
+---
+
+## Common Configuration Fields
+
+### 1. Temperature
+- Controls randomness.
+- **Lower values (e.g., 0.2)** → More predictable, factual responses.
+- **Higher values (e.g., 0.8)** → More creative and varied responses.
+
+### 2. Top-P (Nucleus Sampling)
+- Controls response diversity by setting a probability threshold.
+- **Low values (e.g., 0.3)** → Model picks from the most likely words only.
+- **High values (e.g., 0.9)** → More diverse choices, increasing creativity.
+- Works similarly to **temperature** but in a different way (usually adjust only one).
+
+### 3. Max Tokens
+- Sets the limit for how long the response can be.
+- **Higher values** → Longer responses (up to the model’s max limit).
+- **Lower values** → Shorter, more concise answers.
+
+### 4. Frequency Penalty
+- Discourages repetition of words/phrases.
+- **Higher values** → Less repetition, more varied language.
+- **Lower values** → May repeat phrases more often.
+
+### 5. Presence Penalty
+- Encourages new topics by discouraging words already used.
+- **Higher values** → Model is more likely to introduce new ideas.
+- **Lower values** → Sticks to the main topic more.
+
+### 6. Top-K (Used in LLaMA, Gemini, Claude, etc.)
+- Limits how many top word choices the model considers at each step.
+- **Top-K = 40** means the model picks the next word from the **top 40 most likely words**.
+- **Lower values (e.g., 5)** → More deterministic.
+- **Higher values (e.g., 100)** → More creative but riskier outputs.
+
+### 7. Stop Sequences
+- Defines words/phrases that will make the response stop early.
+- Useful for controlling response length or ensuring structured output.
+
+---
+
+## Less Common / Model-Specific Fields
+
+### 1. Logit Bias (*OpenAI, Claude, Gemini*)
+- Allows boosting or suppressing specific words/tokens.
+- Example: You can bias the model to prefer `"yes"` over `"no"`.
+
+### 2. Repetition Penalty (*Google Gemini, LLaMA*)
+- Similar to **frequency penalty** but applied differently.
+- Reduces the likelihood of repeating words or phrases.
+- **Higher values** → Avoids repetition.
+
+### 3. Seed (*Claude, OpenAI, Gemini, LLaMA*)
+- Fixes randomness so that the same input always gives the same response.
+- Useful for reproducible results in testing environments.
+
+### 4. Streaming (*OpenAI, Claude, Gemini*)
+- If enabled, the model sends partial responses as it generates them (instead of waiting for the full response).
+- Used for chat apps to display text in real-time.
+
+### 5. Response Format (*OpenAI, Gemini*)
+- Lets you control whether the response is returned as plain text or structured (like JSON).
+- OpenAI supports `"response_format": "json"`, ensuring the output follows JSON rules.
+
+### 6. Tool Calling (Function Calling) (*OpenAI, Gemini, Claude*)
+- Allows the model to call external tools/functions.
+- **OpenAI:** Function calling (`"tools"`)
+- **Anthropic Claude:** Tool Use
+- **Gemini:** Function calling
+- Useful for integrating with APIs, calculators, or databases.
+
+### 7. Safety Settings (*Google Gemini, Claude, OpenAI*)
+- Allows setting strictness levels for filtering harmful or inappropriate content.
+- Example: `"safety_settings": { "harassment": "high" }` in Gemini.
+
+### 8. Context Window (varies by model)
+- Not a request field but an important limitation.
+- Determines how much past conversation the model remembers.
+  - **Claude 3 Opus:** ~200K tokens
+  - **GPT-4 Turbo:** ~128K tokens
+  - **Gemini 1.5 Pro:** ~1M tokens
+
+### 9. Temperature Decay (*LLaMA, some custom APIs*)
+- Gradually lowers the temperature as the model generates output.
+- Helps keep responses structured while allowing creativity at the start.
+
+### 10. Penalty Alpha (*Anthropic Claude*)
+- Adjusts how much the model explores new topics vs. staying focused.
+- **Higher values** = More exploratory responses.
+
+
+
 ## Prompt Caching
 
 ### **Why Use Prompt Caching?**
