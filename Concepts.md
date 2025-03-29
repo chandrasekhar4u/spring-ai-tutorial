@@ -21,7 +21,7 @@
 
 > [!NOTE]
 > Explain pre-steps in ReadMe. Also verify local setup.
-> [Pre Steps](./ReadMe.md#tutorial_1_0_simpleprompt)
+> [Pre Steps](./ReadMe.md#pre-steps)
 
 ## Prompts
 
@@ -33,6 +33,7 @@
 
 > [!NOTE]
 > Go to tutorial 1
+> [tutorial_1_0](./ReadMe.md#tutorial_1_0_simpleprompt)
 
 
 - **Model Spec & Chain of commands:**
