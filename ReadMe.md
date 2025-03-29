@@ -53,6 +53,14 @@ sequenceDiagram
 
 http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest in solar system
 
+## Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations
+- Control different configurations of LLM to control generation.
+
+http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1
+http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.8
+http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.9
+http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.1
+
 ## Tutorial_2_PromptWithContext
 - Add memory so that previous context can be retained & passed to LLM with every prompt.
 - PROMPT = user input + Prior questions & answers
