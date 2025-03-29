@@ -55,6 +55,8 @@ http://localhost:8080/ai/spring/tutorial/1.1?userInput=which planet is biggest i
 
 ## Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations
 - Control different configurations of LLM to control generation.
+- Try:
+  - Add more configurations & try out hwo they control genration.
 
 http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1
 http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.8
