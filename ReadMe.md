@@ -300,6 +300,16 @@ sequenceDiagram
 
 ### Test
 
+## Tutorial_10_0_ModelContextProtocol
+
+### Highlights
+
+### Test
+[http://localhost:8080/ai/spring/tutorial/1?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/1?userInput=what%20is%20the%20latest%20version%20of%20java)  --> Without MCP
+
+[http://localhost:8080/ai/spring/tutorial/10?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/10?userInput=what%20is%20the%20latest%20version%20of%20java) --> With MCP
+
+
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
 https://spring.io/blog/2025/01/21/spring-ai-agentic-patterns
