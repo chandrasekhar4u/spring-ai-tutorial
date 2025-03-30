@@ -165,9 +165,10 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 > [!TIP]
 > To realize caching benefits, place static content like instructions and examples at the beginning of your prompt, and put variable content, such as user-specific information, at the end. https://platform.openai.com/docs/guides/prompt-caching#structuring-prompts
 
-- For Spring & Langchain4j feature not yet implemented
-- https://github.com/spring-projects/spring-ai/issues/1403
-- https://github.com/langchain4j/langchain4j/issues/1591
+- Open AI - Prompt caching enabled by default for all. https://platform.openai.com/docs/guides/prompt-caching
+- Anthropic - For Spring & Langchain4j feature not yet implemented
+  - https://github.com/spring-projects/spring-ai/issues/1403
+  - https://github.com/langchain4j/langchain4j/issues/1591
 
 ## Context Memory
 
