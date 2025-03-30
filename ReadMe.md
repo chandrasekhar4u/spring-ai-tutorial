@@ -303,12 +303,18 @@ sequenceDiagram
 ## Tutorial_10_0_ModelContextProtocol
 
 ### Highlights
+- Integrate with Brave Web Search API using MCP Server
+- Brave Web Search MCP Server - https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search
+- Brave Web Search API key - https://api-dashboard.search.brave.com/app/keys
+- Spring MCP Client - https://docs.spring.io/spring-ai/reference/api/mcp/mcp-client-boot-starter-docs.html
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/1?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/1?userInput=what%20is%20the%20latest%20version%20of%20java)  --> Without MCP
 
 [http://localhost:8080/ai/spring/tutorial/10?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/10?userInput=what%20is%20the%20latest%20version%20of%20java) --> With MCP
 
+### Try on your own
+- Try to integrate any other MCP server. Reference - https://modelcontextprotocol.io/examples
 
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
