@@ -9,6 +9,21 @@
 - Add API keys in properties file.
 - Sprig auto discovers & create ChatModel beans for configured models.
 
+## Setup
+- Install JDK 17 or latest
+- Install node.js latest (Needed for MCP tutorial) https://nodejs.org/en/download/
+- Have a IDE that supports Java, Gradle & Spring Boot
+- Import this project into your IDE as gradle project
+- Add application-dev.properties & make sure it has all API keys
+
+```terminal
+C:\Users\ravik>npm -v
+11.2.0
+
+C:\Users\ravik>npx -v
+11.2.0
+```
+
 ## Tutorial_1_0_SimplePrompt
 > [!NOTE]
 > [Explain concepts](./Concepts.md#prompts)
