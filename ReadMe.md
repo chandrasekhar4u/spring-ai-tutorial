@@ -314,7 +314,7 @@ sequenceDiagram
 [http://localhost:8080/ai/spring/tutorial/10?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/10?userInput=what%20is%20the%20latest%20version%20of%20java) --> With MCP
 
 ### Try on your own
-- Try to integrate any other MCP server. Reference - https://modelcontextprotocol.io/examples
+- Try to integrate any other MCP server. Reference - https://modelcontextprotocol.io/examples  https://github.com/modelcontextprotocol/servers
 
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
