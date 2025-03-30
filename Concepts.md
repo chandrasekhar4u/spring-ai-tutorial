@@ -30,6 +30,10 @@
     - **Example:** “How can I use Spring AI in Java?”
     - The LLM processes this prompt to generate a relevant response.
     - **Use case:** Ask the model for information or specific tasks, like querying a database or generating a summary.
+- **Token**
+    - Tokens can be thought of as pieces of words. https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+    - 1 token ~= 4 chars in English
+    - 1-2 sentence ~= 30 tokens
 
 > [!NOTE]
 > Go to tutorial 1
