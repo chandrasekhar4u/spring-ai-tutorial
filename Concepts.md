@@ -247,53 +247,60 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 
 Reference: https://platform.openai.com/docs/guides/moderation
 
+> [!NOTE]
+> Go to tutorial 9
+
 -----
 -----
 
 # Agentic AI
 
-## **Workflows vs Agents in AI**
+## **AI Workflows vs Agents in AI**
 
-### **Workflows** (Prescriptive Systems)
+- **Workflows** are **orchestrated through predefined code paths**, ensuring a fixed and predictable sequence of steps, which is great for well-defined tasks.
+- **Agents** are more **dynamic** and **autonomous**, where the system itself decides how to approach the task and when to call tools based on the context.
+- While **agents** offer autonomy and flexibility, **workflows** are often preferred in environments where **predictability**, **reliability**, and **maintainability** are crucial, especially in enterprise applications.
+
+Reference: https://www.anthropic.com/engineering/building-effective-agents
+
+## AI Workflows
+
+#### **AI Workflows** (Prescriptive Systems)
 - **What is it?**  
   A **workflow** is a system where **LLMs** and tools are orchestrated through **predefined code paths**. The AI follows a set sequence of steps designed by developers.
 - **How it works**:  
   - The system executes specific, predefined tasks in a fixed order.
-  - For example, in a **workflow**, the AI might first process the input, then call an external API to fetch data, and finally return the response, all in a defined sequence.
 - **Key Benefits**:
   - **Predictable**: The steps are defined in advance, ensuring a consistent output.
   - **Reliable**: Works well for well-defined tasks that don’t change often.
   - **Ideal for Enterprises**: Provides **stability** and **maintainability**, which are crucial for business applications.
 
-### **Agents** (Autonomous Systems)
+- Walk through this article - https://spring.io/blog/2025/01/21/spring-ai-agentic-patterns
+
+> [!NOTE]
+> Go to tutorial 5 & 6
+
+
+## AI Agents (Autonomous)
+
+#### **Agents** (Autonomous Systems)
 - **What is it?**  
   An **AI agent** is a system where **LLMs** dynamically direct their own processes and decide when to use tools based on the user’s input.
 - **How it works**:  
   - The **agent** operates autonomously, meaning it makes decisions about how to approach the task and which tools to use based on real-time data and context.
-  - For example, the AI agent might decide in the moment to call a tool (e.g., an API or a database) based on the specific details of the user's query.
 - **Key Benefits**:
   - **Flexible**: The system adapts to different situations and changes its behavior as needed.
   - **Autonomous**: Agents can make decisions without predefined steps.
   - **Ideal for Complex Problems**: Useful for tasks that are unclear or require adaptive problem-solving.
 
-### **Main Difference**
-- **Workflows** are **orchestrated through predefined code paths**, ensuring a fixed and predictable sequence of steps, which is great for well-defined tasks.
-- **Agents** are more **dynamic** and **autonomous**, where the system itself decides how to approach the task and when to call tools based on the context.
+> [!NOTE]
+> Go to tutorial 4
 
-### **Key Insight**
-- While **agents** offer autonomy and flexibility, **workflows** are often preferred in environments where **predictability**, **reliability**, and **maintainability** are crucial, especially in enterprise applications.
+## Model Context Protocol
 
 
-### **Key Concepts in Tool Usage**:
-- **Tool Definition**: You must define the tool’s capabilities (e.g., data-fetching, calculations) and input/output schemas.
-- **Model-Controlled Execution**: The **LLM** decides when and how to invoke tools based on user prompts, providing dynamic and context-aware responses.
-- **Tool Invocation**: The tool's input parameters are passed from the **LLM** to the **Spring Application**, which executes the tool and processes the results.
-- **Response Generation**: The tool's results are sent back to the **LLM**, which integrates them into the final output provided to the user.
-
-### **Advantages of Using Tools in Spring AI**:
-- **Dynamic Interactions**: Tools enable the **LLM** to access and integrate real-world data (e.g., API calls, database queries) in real-time.
-- **Modular Approach**: Spring AI allows you to build reusable and extendable tools that can be integrated into various use cases.
-- **Enhanced AI Capabilities**: Tools provide additional functionality (such as data retrieval, calculations, or external service calls) to augment the LLM’s intelligence.
+> [!NOTE]
+> Go to tutorial 10
 
 
 
