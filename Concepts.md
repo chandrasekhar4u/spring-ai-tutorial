@@ -320,6 +320,23 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
   - **Autonomous**: Agents can make decisions without predefined steps.
   - **Ideal for Complex Problems**: Useful for tasks that are unclear or require adaptive problem-solving.
 
+#### Tools / Function calling
+  - Tool calling (also known as function calling) is a common pattern in AI applications allowing a model to interact with a set of APIs, or tools, augmenting its capabilities.
+  - Main Uses:
+    - **Information Retrieval**: Tools retrieve data from external sources (databases, web services, etc.) to enhance the model's knowledge. This is useful in scenarios, like fetching weather information or querying a database for records.  
+    - **Taking Action**: Tools can automate tasks such as sending emails, creating records, or triggering workflows. Examples include booking flights, submitting forms, or generating code in a TDD scenario.
+
+#### How Tools / Function calling Works:
+- The model **requests** a tool call with input arguments.
+- The **client application** executes the tool call and returns the result.
+- The model does not have access to the tools or APIs directly.
+
+#### Structured output
+- Structured Outputs is a feature that ensures the model will always generate responses that adhere to your supplied JSON Schema.
+- **Better parsing**: The client can easily parse and process the result
+- https://platform.openai.com/docs/guides/structured-outputs
+- https://ai.google.dev/gemini-api/docs/structured-output?lang=python
+
 > [!NOTE]
 > Go to tutorial 4
 
