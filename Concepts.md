@@ -170,6 +170,10 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 - **Penalty Alpha (*Anthropic Claude*)**
   - Adjusts how much the
 
+> [!NOTE]
+> Go to tutorial 1.2
+> [tutorial_1_2](./ReadMe.md#tutorial_1_2_simplepromptandsystempromptandconfigurations)
+
 -----
 
 # Context Memory
@@ -212,10 +216,33 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
   - **Step 3: Generate** a response by combining the augmented information with the user's prompt.
   - This process ensures that the model provides responses based on the most relevant, up-to-date, and specific data available.
 
-- **Why Use RAG?**
-  - **Accuracy:** RAG helps improve response quality by using external data sources.
-  - **Dynamic Knowledge:** It provides real-time access to new data beyond the model's training cut-off.
-  - **Custom Knowledge:** Use your own documents, knowledge bases, or databases to augment LLM responses.
+- **Vector database:**
+  - To store & retrieve internal knowledge base, vector database are preferred.
+  - **Why not relational or NoSQL database?**
+    - relational databases or NoSQL databases can store & search based on string/text matches only.
+    - In LLM world, exact text matches won't work. We need something that can do matching based on **meaning**
+  - Why Use Vector Databases?  
+    - **Stores embeddings** of text, images, or audio.  
+    - **Uses Approximate Nearest Neighbor (ANN) search** for fast retrieval.  
+    - **Handles synonyms & context** better than keyword search.  
+    - **Supports multi-modal search** (e.g., searching text & images together).  
+
+- **Embeddings**
+  - Embeddings are **high-dimensional numerical representations** of words, sentences, or documents.
+  - Each number in an embedding vector represents a **learned feature** or **semantic aspect** of the input text. These features are **not explicitly interpretable** like words but capture **relationships, context, and meaning**.
+  - Example: A Simplified 3D Embedding Space 
+    ```plaintext
+    "AI" → [0.9, 0.1, 0.8]
+    "Machine Learning" → [0.92, 0.12, 0.79] (very similar!)
+    "Banana" → [0.2, 0.8, 0.1] (totally different!)
+    ```
+    Here’s what **each dimension might represent** (hypothetically):  
+    - **First number (0.9)** → "Technology-related"  
+    - **Second number (0.1)** → "Food-related"  
+    - **Third number (0.8)** → "AI-specific"  
+    
+    Since `"AI"` and `"Machine Learning"` have **almost identical vectors**, they are **semantically close**.  
+    But `"Banana"` is **far away**, meaning it has no relation to AI.  
 
 - **What to Watch For:**
   - **Data Privacy & Security:** Ensure that sensitive or confidential internal data is handled securely when using RAG.
