@@ -184,7 +184,9 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter)\
+[http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet)
+
+[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter planet](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter%20planet)\
 [http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 
 
