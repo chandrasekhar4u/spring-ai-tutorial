@@ -27,6 +27,9 @@ C:\Users\ravik>npx -v
 ## Libraries
 Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
 
+-----
+-----
+
 ### Key Benefits:
 - **Ease of use**: Simplifies interacting with LLMs.
 - **Context management**: Helps with maintaining conversation history or context.
