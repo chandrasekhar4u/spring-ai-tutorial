@@ -339,6 +339,22 @@ sequenceDiagram
 - Brave Web Search API key - https://api-dashboard.search.brave.com/app/keys
 - Spring MCP Client - https://docs.spring.io/spring-ai/reference/api/mcp/mcp-client-boot-starter-docs.html
 
+```mermaid
+flowchart LR
+    
+    subgraph Spring_Application["Spring Application (MCP Host)"]
+        Chat_Client["Spring AI (Chat Client)"] 
+        MCP_Client["Spring AI (MCP Client)"]        
+        MCP_Server["Brave Search (MCP Server)"]        
+    end
+    Chat_Client -->|Prompt| LLM
+    Chat_Client -->|Tools Callback Provider| MCP_Client
+    MCP_Client -->|Communicates with| MCP_Server
+    MCP_Server -->|Integrates with| E["Brave Search API"]
+
+
+```
+
 ### Test
 [http://localhost:8080/ai/spring/tutorial/1?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/1?userInput=what%20is%20the%20latest%20version%20of%20java)  --> Without MCP
 
