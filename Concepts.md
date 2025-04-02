@@ -1,4 +1,4 @@
-# Concepts
+# Basics
 
 
 ## LLM Model Facts
@@ -23,7 +23,9 @@
 > Explain pre-steps in ReadMe. Also verify local setup.
 > [Pre Steps](./ReadMe.md#pre-steps)
 
-## Prompts
+-----
+
+# Prompts
 
 - **User Prompt:**
     - **Definition:** A **User Prompt** is a question or instruction given by the end user.
@@ -38,7 +40,6 @@
 > [!NOTE]
 > Go to tutorial 1
 > [tutorial_1_0](./ReadMe.md#tutorial_1_0_simpleprompt)
-
 
 - **Model Spec & Chain of commands:**
     - Reference https://openai.com/index/introducing-the-model-spec/
@@ -59,106 +60,9 @@
 > [!NOTE]
 > Go to tutorial 1.1
 
-# Common LLM API Configuration Fields (OpenAI, Claude, Gemini, LLaMA, etc.)
+### Prompt Caching
 
-When calling an **LLM (Large Language Model) API**, you send a request with configuration fields that control the model’s response. These fields are **mostly shared** across models like OpenAI (GPT), Anthropic Claude, Google Gemini, and Meta LLaMA.
-
----
-
-## Common Configuration Fields
-
-### 1. Temperature
-- Controls randomness.
-- **Lower values (e.g., 0.2)** → More predictable, factual responses.
-- **Higher values (e.g., 0.8)** → More creative and varied responses.
-
-### 2. Top-P (Nucleus Sampling)
-- Controls response diversity by setting a probability threshold.
-- **Low values (e.g., 0.3)** → Model picks from the most likely words only.
-- **High values (e.g., 0.9)** → More diverse choices, increasing creativity.
-- Works similarly to **temperature** but in a different way (usually adjust only one).
-
-### 3. Max Tokens
-- Sets the limit for how long the response can be.
-- **Higher values** → Longer responses (up to the model’s max limit).
-- **Lower values** → Shorter, more concise answers.
-
-### 4. Frequency Penalty
-- Discourages repetition of words/phrases.
-- **Higher values** → Less repetition, more varied language.
-- **Lower values** → May repeat phrases more often.
-
-### 5. Presence Penalty
-- Encourages new topics by discouraging words already used.
-- **Higher values** → Model is more likely to introduce new ideas.
-- **Lower values** → Sticks to the main topic more.
-
-### 6. Top-K (Used in LLaMA, Gemini, Claude, etc.)
-- Limits how many top word choices the model considers at each step.
-- **Top-K = 40** means the model picks the next word from the **top 40 most likely words**.
-- **Lower values (e.g., 5)** → More deterministic.
-- **Higher values (e.g., 100)** → More creative but riskier outputs.
-
-### 7. Stop Sequences
-- Defines words/phrases that will make the response stop early.
-- Useful for controlling response length or ensuring structured output.
-
----
-
-## Less Common / Model-Specific Fields
-
-### 1. Logit Bias (*OpenAI, Claude, Gemini*)
-- Allows boosting or suppressing specific words/tokens.
-- Example: You can bias the model to prefer `"yes"` over `"no"`.
-
-### 2. Repetition Penalty (*Google Gemini, LLaMA*)
-- Similar to **frequency penalty** but applied differently.
-- Reduces the likelihood of repeating words or phrases.
-- **Higher values** → Avoids repetition.
-
-### 3. Seed (*Claude, OpenAI, Gemini, LLaMA*)
-- Fixes randomness so that the same input always gives the same response.
-- Useful for reproducible results in testing environments.
-
-### 4. Streaming (*OpenAI, Claude, Gemini*)
-- If enabled, the model sends partial responses as it generates them (instead of waiting for the full response).
-- Used for chat apps to display text in real-time.
-
-### 5. Response Format (*OpenAI, Gemini*)
-- Lets you control whether the response is returned as plain text or structured (like JSON).
-- OpenAI supports `"response_format": "json"`, ensuring the output follows JSON rules.
-
-### 6. Tool Calling (Function Calling) (*OpenAI, Gemini, Claude*)
-- Allows the model to call external tools/functions.
-- **OpenAI:** Function calling (`"tools"`)
-- **Anthropic Claude:** Tool Use
-- **Gemini:** Function calling
-- Useful for integrating with APIs, calculators, or databases.
-
-### 7. Safety Settings (*Google Gemini, Claude, OpenAI*)
-- Allows setting strictness levels for filtering harmful or inappropriate content.
-- Example: `"safety_settings": { "harassment": "high" }` in Gemini.
-
-### 8. Context Window (varies by model)
-- Not a request field but an important limitation.
-- Determines how much past conversation the model remembers.
-  - **Claude 3 Opus:** ~200K tokens
-  - **GPT-4 Turbo:** ~128K tokens
-  - **Gemini 1.5 Pro:** ~1M tokens
-
-### 9. Temperature Decay (*LLaMA, some custom APIs*)
-- Gradually lowers the temperature as the model generates output.
-- Helps keep responses structured while allowing creativity at the start.
-
-### 10. Penalty Alpha (*Anthropic Claude*)
-- Adjusts how much the model explores new topics vs. staying focused.
-- **Higher values** = More exploratory responses.
-
-
-
-## Prompt Caching
-
-### **Why Use Prompt Caching?**
+#### **Why Use Prompt Caching?**
 - **Faster Responses**:  
   Reusing previously cached responses reduces the need to recompute answers, leading to faster response times.  
 - **Reduce Redundancy**:  
@@ -174,7 +78,105 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
   - https://github.com/spring-projects/spring-ai/issues/1403
   - https://github.com/langchain4j/langchain4j/issues/1591
 
-## Context Memory
+-----
+
+# LLM API Configuration Fields (OpenAI, Claude, Gemini, LLaMA, etc.)
+
+When calling an **LLM (Large Language Model) API**, you send a request with configuration fields that control the model’s response.
+
+### Common Configuration Fields
+
+- **Temperature**
+  - Controls randomness.
+  - **Lower values (e.g., 0.2)** → More predictable, factual responses.
+  - **Higher values (e.g., 0.8)** → More creative and varied responses.
+
+- **Top-P (Nucleus Sampling)**
+  - Controls response diversity by setting a probability threshold.
+  - **Low values (e.g., 0.3)** → Model picks from the most likely words only.
+  - **High values (e.g., 0.9)** → More diverse choices, increasing creativity.
+  - Works similarly to **temperature** but in a different way (usually adjust only one).
+
+- **Max Tokens**
+  - Sets the limit for how long the response can be.
+  - **Higher values** → Longer responses (up to the model’s max limit).
+  - **Lower values** → Shorter, more concise answers.
+
+- **Frequency Penalty**
+  - Discourages repetition of words/phrases.
+  - **Higher values** → Less repetition, more varied language.
+  - **Lower values** → May repeat phrases more often.
+
+- **Presence Penalty**
+  - Encourages new topics by discouraging words already used.
+  - **Higher values** → Model is more likely to introduce new ideas.
+  - **Lower values** → Sticks to the main topic more.
+
+- **Top-K (Used in LLaMA, Gemini, Claude, etc.)**
+  - Limits how many top word choices the model considers at each step.
+  - **Top-K = 40** means the model picks the next word from the **top 40 most likely words**.
+  - **Lower values (e.g., 5)** → More deterministic.
+  - **Higher values (e.g., 100)** → More creative but riskier outputs.
+
+- **Stop Sequences**
+  - Defines words/phrases that will make the response stop early.
+  - Useful for controlling response length or ensuring structured output.
+
+### Less Common / Model-Specific Fields
+
+- **Logit Bias (*OpenAI, Claude, Gemini*)**
+  - Allows boosting or suppressing specific words/tokens.
+  - Example: You can bias the model to prefer `"yes"` over `"no"`.
+
+- **Repetition Penalty (*Google Gemini, LLaMA*)**
+  - Similar to **frequency penalty** but applied differently.
+  - Reduces the likelihood of repeating words or phrases.
+  - **Higher values** → Avoids repetition.
+
+- **Seed (*Claude, OpenAI, Gemini, LLaMA*)**
+  - Fixes randomness so that the same input always gives the same response.
+  - Useful for reproducible results in testing environments.
+
+- **Streaming (*OpenAI, Claude, Gemini*)**
+  - If enabled, the model sends partial responses as it generates them (instead of waiting for the full response).
+  - Used for chat apps to display text in real-time.
+
+- **Response Format (*OpenAI, Gemini*)**
+  - Lets you control whether the response is returned as plain text or structured (like JSON).
+  - OpenAI supports `"response_format": "json"`, ensuring the output follows JSON rules.
+
+- **Tool Calling (Function Calling) (*OpenAI, Gemini, Claude*)**
+  - Allows the model to call external tools/functions.
+  - **OpenAI:** Function calling (`"tools"`)
+  - **Anthropic Claude:** Tool Use
+  - **Gemini:** Function calling
+  - Useful for integrating with APIs, calculators, or databases.
+
+- **Safety Settings (*Google Gemini, Claude, OpenAI*)**
+  - Allows setting strictness levels for filtering harmful or inappropriate content.
+  - Example: `"safety_settings": { "harassment": "high" }` in Gemini.
+
+- **Context Window (varies by model)**
+  - Not a request field but an important limitation.
+  - Determines how much past conversation the model remembers.
+    - **Claude 3 Opus:** ~200K tokens
+    - **GPT-4 Turbo:** ~128K tokens
+    - **Gemini 1.5 Pro:** ~1M tokens
+
+- **Temperature Decay (*LLaMA, some custom APIs*)**
+  - Gradually lowers the temperature as the model generates output.
+  - Helps keep responses structured while allowing creativity at the start.
+
+- **Penalty Alpha (*Anthropic Claude*)**
+  - Adjusts how much the
+
+> [!NOTE]
+> Go to tutorial 1.2
+> [tutorial_1_2](./ReadMe.md#tutorial_1_2_simplepromptandsystempromptandconfigurations)
+
+-----
+
+# Context Memory
 
 - **What is Context Memory?**
   - **Definition:** Context memory allows the model to remember previous interactions or inputs during a session.
@@ -200,22 +202,47 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 > [!NOTE]
 > Go to tutorial 2
 
-## RAG
+-----
+
+# RAG
 
 - **What is RAG?**
   - **Definition:** RAG (Retrieval-Augmented Generation) combines retrieving relevant information from an external source and using it to generate a response.
   - **Use case:** Instead of relying solely on the model's pre-existing knowledge, RAG fetches real-time or specific data from an organization's internal data sources (like databases, knowledge bases, or document repositories) to generate more accurate, up-to-date, and context-specific responses.
 
-**How RAG Works:**
-- **Step 1: Retrieve** relevant information from an external source using a query.
-- **Step 2: Augment** the retrieved information by refining or adding context to it. This step may involve preprocessing the data, filtering irrelevant details, or summarizing large data before passing it to the generative model.
-- **Step 3: Generate** a response by combining the augmented information with the user's prompt.
-- This process ensures that the model provides responses based on the most relevant, up-to-date, and specific data available.
+- **How RAG Works:**
+  - **Step 1: Retrieve** relevant information from an external source using a query.
+  - **Step 2: Augment** the retrieved information by refining or adding context to it. This step may involve preprocessing the data, filtering irrelevant details, or summarizing large data before passing it to the generative model.
+  - **Step 3: Generate** a response by combining the augmented information with the user's prompt.
+  - This process ensures that the model provides responses based on the most relevant, up-to-date, and specific data available.
 
-- **Why Use RAG?**
-  - **Accuracy:** RAG helps improve response quality by using external data sources.
-  - **Dynamic Knowledge:** It provides real-time access to new data beyond the model's training cut-off.
-  - **Custom Knowledge:** Use your own documents, knowledge bases, or databases to augment LLM responses.
+- **Vector database:**
+  - To store & retrieve internal knowledge base, vector database are preferred.
+  - **Why not relational or NoSQL database?**
+    - relational databases or NoSQL databases can store & search based on string/text matches only.
+    - In LLM world, exact text matches won't work. We need something that can do matching based on **meaning**
+  - Why Use Vector Databases?  
+    - **Stores embeddings** of text, images, or audio.  
+    - **Uses Approximate Nearest Neighbor (ANN) search** for fast retrieval.  
+    - **Handles synonyms & context** better than keyword search.  
+    - **Supports multi-modal search** (e.g., searching text & images together).  
+
+- **Embeddings**
+  - Embeddings are **high-dimensional numerical representations** of words, sentences, or documents.
+  - Each number in an embedding vector represents a **learned feature** or **semantic aspect** of the input text. These features are **not explicitly interpretable** like words but capture **relationships, context, and meaning**.
+  - Example: A Simplified 3D Embedding Space 
+    ```plaintext
+    "AI" → [0.9, 0.1, 0.8]
+    "Machine Learning" → [0.92, 0.12, 0.79] (very similar!)
+    "Banana" → [0.2, 0.8, 0.1] (totally different!)
+    ```
+    Here’s what **each dimension might represent** (hypothetically):  
+    - **First number (0.9)** → "Technology-related"  
+    - **Second number (0.1)** → "Food-related"  
+    - **Third number (0.8)** → "AI-specific"  
+    
+    Since `"AI"` and `"Machine Learning"` have **almost identical vectors**, they are **semantically close**.  
+    But `"Banana"` is **far away**, meaning it has no relation to AI.  
 
 - **What to Watch For:**
   - **Data Privacy & Security:** Ensure that sensitive or confidential internal data is handled securely when using RAG.
@@ -226,7 +253,11 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 > [!NOTE]
 > Go to tutorial 3
 
-## **What is LLM Moderation?**
+-----
+
+# Moderation
+
+### **What is LLM Moderation?**
 
 - **Definition**:  
   **LLM Moderation** involves using Large Language Models (LLMs) to **flag** and **score** harmful, inappropriate, or offensive content in user inputs and AI-generated outputs, rather than directly filtering or blocking content.
@@ -243,51 +274,82 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 
 Reference: https://platform.openai.com/docs/guides/moderation
 
-## Agentic AI
+> [!NOTE]
+> Go to tutorial 9
 
-## **Workflows vs Agents in AI**
+-----
+-----
 
-### **Workflows** (Prescriptive Systems)
+# Agentic AI
+
+## **AI Workflows vs Agents in AI**
+
+- **Workflows** are **orchestrated through predefined code paths**, ensuring a fixed and predictable sequence of steps, which is great for well-defined tasks.
+- **Agents** are more **dynamic** and **autonomous**, where the system itself decides how to approach the task and when to call tools based on the context.
+- While **agents** offer autonomy and flexibility, **workflows** are often preferred in environments where **predictability**, **reliability**, and **maintainability** are crucial, especially in enterprise applications.
+
+Reference: https://www.anthropic.com/engineering/building-effective-agents
+
+## AI Workflows
+
+#### **AI Workflows** (Prescriptive Systems)
 - **What is it?**  
   A **workflow** is a system where **LLMs** and tools are orchestrated through **predefined code paths**. The AI follows a set sequence of steps designed by developers.
 - **How it works**:  
   - The system executes specific, predefined tasks in a fixed order.
-  - For example, in a **workflow**, the AI might first process the input, then call an external API to fetch data, and finally return the response, all in a defined sequence.
 - **Key Benefits**:
   - **Predictable**: The steps are defined in advance, ensuring a consistent output.
   - **Reliable**: Works well for well-defined tasks that don’t change often.
   - **Ideal for Enterprises**: Provides **stability** and **maintainability**, which are crucial for business applications.
 
-### **Agents** (Autonomous Systems)
+- Walk through this article - https://spring.io/blog/2025/01/21/spring-ai-agentic-patterns
+
+> [!NOTE]
+> Go to tutorial 5 & 6
+
+
+## AI Agents (Autonomous)
+
+#### **Agents** (Autonomous Systems)
 - **What is it?**  
   An **AI agent** is a system where **LLMs** dynamically direct their own processes and decide when to use tools based on the user’s input.
 - **How it works**:  
   - The **agent** operates autonomously, meaning it makes decisions about how to approach the task and which tools to use based on real-time data and context.
-  - For example, the AI agent might decide in the moment to call a tool (e.g., an API or a database) based on the specific details of the user's query.
 - **Key Benefits**:
   - **Flexible**: The system adapts to different situations and changes its behavior as needed.
   - **Autonomous**: Agents can make decisions without predefined steps.
   - **Ideal for Complex Problems**: Useful for tasks that are unclear or require adaptive problem-solving.
 
-### **Main Difference**
-- **Workflows** are **orchestrated through predefined code paths**, ensuring a fixed and predictable sequence of steps, which is great for well-defined tasks.
-- **Agents** are more **dynamic** and **autonomous**, where the system itself decides how to approach the task and when to call tools based on the context.
+#### Tools / Function calling
+  - Tool calling (also known as function calling) is a common pattern in AI applications allowing a model to interact with a set of APIs, or tools, augmenting its capabilities.
+  - Main Uses:
+    - **Information Retrieval**: Tools retrieve data from external sources (databases, web services, etc.) to enhance the model's knowledge. This is useful in scenarios, like fetching weather information or querying a database for records.  
+    - **Taking Action**: Tools can automate tasks such as sending emails, creating records, or triggering workflows. Examples include booking flights, submitting forms, or generating code in a TDD scenario.
 
-### **Key Insight**
-- While **agents** offer autonomy and flexibility, **workflows** are often preferred in environments where **predictability**, **reliability**, and **maintainability** are crucial, especially in enterprise applications.
+#### How Tools / Function calling Works:
+- The model **requests** a tool call with input arguments.
+- The **client application** executes the tool call and returns the result.
+- The model does not have access to the tools or APIs directly.
+
+#### Structured output
+- Structured Outputs is a feature that ensures the model will always generate responses that adhere to your supplied JSON Schema.
+- **Better parsing**: The client can easily parse and process the result
+- https://platform.openai.com/docs/guides/structured-outputs
+- https://ai.google.dev/gemini-api/docs/structured-output?lang=python
+
+> [!NOTE]
+> Go to tutorial 4
+
+## Model Context Protocol
 
 
-### **Key Concepts in Tool Usage**:
-- **Tool Definition**: You must define the tool’s capabilities (e.g., data-fetching, calculations) and input/output schemas.
-- **Model-Controlled Execution**: The **LLM** decides when and how to invoke tools based on user prompts, providing dynamic and context-aware responses.
-- **Tool Invocation**: The tool's input parameters are passed from the **LLM** to the **Spring Application**, which executes the tool and processes the results.
-- **Response Generation**: The tool's results are sent back to the **LLM**, which integrates them into the final output provided to the user.
+> [!NOTE]
+> Go to tutorial 10
 
-### **Advantages of Using Tools in Spring AI**:
-- **Dynamic Interactions**: Tools enable the **LLM** to access and integrate real-world data (e.g., API calls, database queries) in real-time.
-- **Modular Approach**: Spring AI allows you to build reusable and extendable tools that can be integrated into various use cases.
-- **Enhanced AI Capabilities**: Tools provide additional functionality (such as data retrieval, calculations, or external service calls) to augment the LLM’s intelligence.
-
-
+## Further Reading / Research
+- Learn about other models like audio, video, text to speech etc.
+- Learn about all MCP servers available out there like JetBrains, Microsoft, Jira etc.
+- Learn about MCP server with IDEs
+- Learn about Claude Desktop
 
 

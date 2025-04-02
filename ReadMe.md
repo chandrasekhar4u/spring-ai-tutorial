@@ -24,6 +24,19 @@ C:\Users\ravik>npx -v
 11.2.0
 ```
 
+## Libraries
+Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
+
+### Key Benefits:
+- **Ease of use**: Simplifies interacting with LLMs.
+- **Context management**: Helps with maintaining conversation history or context.
+- **Function calling**: Allows models to call external APIs and services.
+- **Standardization**: Provides consistent API calls across different platforms.
+- **Extensibility**: Facilitates adding custom tools and modules.
+
+-----
+-----
+
 ## Tutorial_1_0_SimplePrompt
 > [!NOTE]
 > [Explain concepts](./Concepts.md#prompts)
@@ -171,7 +184,9 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter)\
+[http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet)
+
+[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter planet](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter%20planet)\
 [http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 
 
@@ -255,13 +270,29 @@ sequenceDiagram
 ```
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+[http://localhost:8080/ai/spring/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/spring/tutorial/4?userInput=any%20plans%20for%20this%20planet)\
+
+
 [http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 [http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any%20plans%20for%20this%20planet)\
 
 
 ### Try on your own
   -
-  
+
+## Tutorial_4_1_AgentToolForWeatherService
+
+### Highlights
+- Add 'Tools' for weather service with little bit complex input schema
+
+### Test
+[http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in san francisco](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20san%20francisco)\
+[http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in la](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20la)\
+[http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in la tomorrow](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20la%20tomorrow)\
+[http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in la day after tomorrow](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20la%20day%20after%20tomorrow)\
+[http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in la 8 days from now](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20la%208%20days%20from%20now)
+
 
 ## Tutorial_5_0_AgenticRoutingWorkflow
 
@@ -307,6 +338,22 @@ sequenceDiagram
 - Brave Web Search MCP Server - https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search
 - Brave Web Search API key - https://api-dashboard.search.brave.com/app/keys
 - Spring MCP Client - https://docs.spring.io/spring-ai/reference/api/mcp/mcp-client-boot-starter-docs.html
+
+```mermaid
+flowchart LR
+    
+    subgraph Spring_Application["Spring Application (MCP Host)"]
+        Chat_Client["Spring AI (Chat Client)"] 
+        MCP_Client["Spring AI (MCP Client)"]        
+        MCP_Server["Brave Search (MCP Server)"]        
+    end
+    Chat_Client -->|Prompt| LLM
+    Chat_Client -->|Tools Callback Provider| MCP_Client
+    MCP_Client -->|Communicates with| MCP_Server
+    MCP_Server -->|Integrates with| E["Brave Search API"]
+
+
+```
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/1?userInput=what is the latest version of java](http://localhost:8080/ai/spring/tutorial/1?userInput=what%20is%20the%20latest%20version%20of%20java)  --> Without MCP
