@@ -346,6 +346,10 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 > [!NOTE]
 > Go to tutorial 10
 
-
+## Further Reading / Research
+- Learn about other models like audio, video, text to speech etc.
+- Learn about all MCP servers available out there like JetBrains, Microsoft, Jira etc.
+- Learn about MCP server with IDEs
+- Learn about Claude Desktop
 
 
