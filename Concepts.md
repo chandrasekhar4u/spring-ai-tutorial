@@ -60,6 +60,18 @@
 > [!NOTE]
 > Go to tutorial 1.1
 
+### Types/Roles of messages in prompt
+
+| Role          | Description | OpenAI (GPT) | Anthropic (Claude) | Google Gemini | Mistral | LLaMA |
+|--------------|-------------|--------------|---------------------|---------------|---------|-------|
+| **System**   | Sets initial behavior, tone, or restrictions for the model. | ✅ Yes | ✅ Yes (Claude 3) | ✅ Yes | ✅ Yes | ✅ Yes |
+| **User**     | The main input message from the human user. | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Assistant** | The model's response to the user’s message. | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Tool**     | Special role for tool/function calling responses. The model outputs structured data for API calls. | ✅ Yes (Function Calling) | ✅ Yes (Tool Use) | ✅ Yes | ❌ No | ❌ No |
+| **Function** | Used in OpenAI for structured API responses when calling functions/tools. | ✅ Yes | ❌ No | ❌ No | ❌ No | ❌ No |
+| **System Instruction** | Similar to system role but used in some models for additional instructions. | ❌ No | ✅ Yes (Claude 3) | ✅ Yes | ❌ No | ❌ No |
+
+
 ### Prompt Caching
 
 #### **Why Use Prompt Caching?**
