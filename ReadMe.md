@@ -1,12 +1,12 @@
 
 # Tutorials
 
-## Pre-steps
-- Get API keys for OpenAI & Claude
-- Add balance to account to make API calls
-- Create spring boot project with spring-ai-openai dependency
-- As per the model you want to sue, add specific dependencies like spring-ai-anthropic-spring-boot-starter & spring-ai-openai-spring-boot-starter
-- Add API keys in properties file.
+## Completed Pre-steps (Only FYI)
+- Acquired API keys for OpenAI & Claude
+- Added balance to account to make API calls
+- Created spring boot project with spring-ai-openai dependency
+- As per the model we want to use, added specific dependencies like spring-ai-anthropic-spring-boot-starter & spring-ai-openai-spring-boot-starter
+- Added API keys in properties file.
 - Sprig auto discovers & create ChatModel beans for configured models.
 
 ## Setup
