@@ -96,91 +96,33 @@
 
 When calling an **LLM (Large Language Model) API**, you send a request with configuration fields that control the model’s response.
 
-### Common Configuration Fields
 
-- **Temperature**
-  - Controls randomness.
-  - **Lower values (e.g., 0.2)** → More predictable, factual responses.
-  - **Higher values (e.g., 0.8)** → More creative and varied responses.
+| **Field** | **Description** | **Example Values** | **Supported in** |
+|-----------|----------------|-------------------|------------------|
+| **Max Tokens** | Sets the limit for how long the response can be. | Higher values → Longer responses (up to the model’s max limit). Lower values → Shorter, more concise answers. | All LLMs |
+| **Temperature** | Controls randomness in responses. | Lower values (e.g., `0.2`) → More predictable, factual responses. Higher values (e.g., `0.8`) → More creative and varied responses. | OpenAI, Claude, Gemini, LLaMA, Mistral |
+| **Top-P (Nucleus Sampling)** | Controls response diversity by setting a probability threshold. | Low values (e.g., `0.3`) → Model picks from the most likely words only. High values (e.g., `0.9`) → More diverse choices, increasing creativity. | OpenAI, Claude, Gemini, LLaMA |
+| **Streaming** | Sends responses in real-time instead of waiting for full output. | `true` → Response streams as it’s generated. `false` → Response is returned all at once. | OpenAI, Claude, Gemini |
+| **Context Window** | Determines how much past conversation the model remembers. | **Claude 3 Opus:** ~200K tokens. **GPT-4 Turbo:** ~128K tokens. **Gemini 1.5 Pro:** ~1M tokens. | Varies by model |
+| **Tool Calling (Function Calling)** | Allows the model to call external tools/APIs. | **OpenAI:** `"tools"` for function calling. **Gemini:** `"function calling"`. **Claude:** `"tool use"`. | OpenAI, Claude, Gemini |
+| **Safety Settings** | Sets filtering levels for harmful content. | `"low"`, `"medium"`, `"high"` → Controls strictness of content moderation. | OpenAI, Claude, Gemini |
+| **Top-K** | Limits how many top word choices the model considers at each step. | `Top-K = 40` → Model picks the next word from the **top 40 most likely words**. Lower values (e.g., `5`) → More deterministic. Higher values (e.g., `100`) → More creative but riskier outputs. | LLaMA, Gemini, Claude |
+| **Stop Sequences** | Defines words/phrases that will make the response stop early. | Example: Setting `["###"]` as a stop sequence ensures the response ends before encountering `"###"`. | OpenAI, Claude, Gemini |
+| **Frequency Penalty** | Discourages repetition of words/phrases. | Higher values (e.g., `2.0`) → Less repetition, more varied language. Lower values (e.g., `0.0`) → May repeat phrases more often. | OpenAI, Gemini |
+| **Presence Penalty** | Encourages new topics by discouraging words already used. | Higher values (e.g., `2.0`) → Model is more likely to introduce new ideas. Lower values (e.g., `0.0`) → Sticks to the main topic more. | OpenAI |
+| **Seed** | Fixes randomness so the same input always gives the same response. | Setting `42` as a seed ensures the same reply each time for reproducibility. | OpenAI, Claude, Gemini, LLaMA |
+| **Repetition Penalty** | Reduces the likelihood of repeating words or phrases. | Higher values (e.g., `2.0`) → Avoids repetition. Lower values (e.g., `1.0`) → Allows natural repetition. | Gemini, LLaMA |
+| **Response Format** | Specifies output as plain text or structured data (e.g., JSON). | `"json"` → Ensures output follows JSON rules. `"text"` → Regular natural language output. | OpenAI, Gemini |
+| **Logit Bias** | Allows boosting or suppressing specific words/tokens. | Example: You can bias the model to prefer `"yes"` over `"no"`. | OpenAI, Claude, Gemini |
+| **Temperature Decay** | Gradually lowers the temperature as the model generates output. | Example: Starts at `0.8` (creative) and decreases to `0.2` (factual) over a long response. | LLaMA, some custom APIs |
+| **Penalty Alpha** | Adjusts how much the model penalizes repetitive outputs. | Example: Higher values make responses more diverse by discouraging repetition. | Anthropic Claude |
 
-- **Top-P (Nucleus Sampling)**
-  - Controls response diversity by setting a probability threshold.
-  - **Low values (e.g., 0.3)** → Model picks from the most likely words only.
-  - **High values (e.g., 0.9)** → More diverse choices, increasing creativity.
-  - Works similarly to **temperature** but in a different way (usually adjust only one).
 
-- **Max Tokens**
-  - Sets the limit for how long the response can be.
-  - **Higher values** → Longer responses (up to the model’s max limit).
-  - **Lower values** → Shorter, more concise answers.
+**Notes:**  
+- **Adjust either Temperature or Top-P**, not both together.  
+- **Stop Sequences** help in formatting structured output.  
+- **Repetition & Frequency Penalties** are useful for making responses more natural.  
 
-- **Frequency Penalty**
-  - Discourages repetition of words/phrases.
-  - **Higher values** → Less repetition, more varied language.
-  - **Lower values** → May repeat phrases more often.
-
-- **Presence Penalty**
-  - Encourages new topics by discouraging words already used.
-  - **Higher values** → Model is more likely to introduce new ideas.
-  - **Lower values** → Sticks to the main topic more.
-
-- **Top-K (Used in LLaMA, Gemini, Claude, etc.)**
-  - Limits how many top word choices the model considers at each step.
-  - **Top-K = 40** means the model picks the next word from the **top 40 most likely words**.
-  - **Lower values (e.g., 5)** → More deterministic.
-  - **Higher values (e.g., 100)** → More creative but riskier outputs.
-
-- **Stop Sequences**
-  - Defines words/phrases that will make the response stop early.
-  - Useful for controlling response length or ensuring structured output.
-
-### Less Common / Model-Specific Fields
-
-- **Logit Bias (*OpenAI, Claude, Gemini*)**
-  - Allows boosting or suppressing specific words/tokens.
-  - Example: You can bias the model to prefer `"yes"` over `"no"`.
-
-- **Repetition Penalty (*Google Gemini, LLaMA*)**
-  - Similar to **frequency penalty** but applied differently.
-  - Reduces the likelihood of repeating words or phrases.
-  - **Higher values** → Avoids repetition.
-
-- **Seed (*Claude, OpenAI, Gemini, LLaMA*)**
-  - Fixes randomness so that the same input always gives the same response.
-  - Useful for reproducible results in testing environments.
-
-- **Streaming (*OpenAI, Claude, Gemini*)**
-  - If enabled, the model sends partial responses as it generates them (instead of waiting for the full response).
-  - Used for chat apps to display text in real-time.
-
-- **Response Format (*OpenAI, Gemini*)**
-  - Lets you control whether the response is returned as plain text or structured (like JSON).
-  - OpenAI supports `"response_format": "json"`, ensuring the output follows JSON rules.
-
-- **Tool Calling (Function Calling) (*OpenAI, Gemini, Claude*)**
-  - Allows the model to call external tools/functions.
-  - **OpenAI:** Function calling (`"tools"`)
-  - **Anthropic Claude:** Tool Use
-  - **Gemini:** Function calling
-  - Useful for integrating with APIs, calculators, or databases.
-
-- **Safety Settings (*Google Gemini, Claude, OpenAI*)**
-  - Allows setting strictness levels for filtering harmful or inappropriate content.
-  - Example: `"safety_settings": { "harassment": "high" }` in Gemini.
-
-- **Context Window (varies by model)**
-  - Not a request field but an important limitation.
-  - Determines how much past conversation the model remembers.
-    - **Claude 3 Opus:** ~200K tokens
-    - **GPT-4 Turbo:** ~128K tokens
-    - **Gemini 1.5 Pro:** ~1M tokens
-
-- **Temperature Decay (*LLaMA, some custom APIs*)**
-  - Gradually lowers the temperature as the model generates output.
-  - Helps keep responses structured while allowing creativity at the start.
-
-- **Penalty Alpha (*Anthropic Claude*)**
-  - Adjusts how much the
 
 > [!NOTE]
 > Go to tutorial 1.2
