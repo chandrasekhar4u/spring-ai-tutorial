@@ -66,6 +66,7 @@ sequenceDiagram
 
 
 ### Try on your own
+  - Try modifying code to use Anthropic Model. https://docs.spring.io/spring-ai/reference/api/chat/anthropic-chat.html#_sample_controller
   - Try different prompts
 
 ## Tutorial_1_1_SimplePromptAndSystemPrompt
@@ -93,6 +94,7 @@ sequenceDiagram
 
 ### Try on your own
   - Change system instructions to specify format of output you want like json or yaml or anything that you wish.
+  - Test chain of command. Give some restrictive system instructions & try giving conflicting prompt. For ex: Give system instructions to answer only about java but ask non java prompts. Test & make system instructions robust.
   - Langchain4j - Try adding system instructions
   
 ## Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations
