@@ -10,11 +10,33 @@
 - Sprig auto discovers & create ChatModel beans for configured models.
 
 ## Setup
+- IDE
+    - Insall a IDE that supports Java, Gradle & Spring Boot
+    - IntelliJ Community Edition (Free)
+        - Windows: https://www.jetbrains.com/idea/download/?section=windows
+        - macOS: https://www.jetbrains.com/idea/download/?section=mac
+- Setup tutorial code
+    - If you have Git installed in your machine Clone this GitHub repository
+    - If you don't have Git installed, then get code using download ZIP option in GitHub
+    - Go to File > New > Project from Existing Sources > select the location where tutorial code has been cloned or downloaded.
+    - Select Gradle as a build tool option & then import project.
 - Install JDK 17 or latest
+    - Getting JDK In IntelliJ:
+        - Go to File > Project Structure > Platform Settings > SDKs > Click + icon > Download JDK
+        - Set Version = 17
+        - Set Vendor = JetBrains Runtime (17.0.14)   ---> Version might differ, but take 17 or latest.
+        - Location = Keep default
+        - Download
+    - Setup Project SDK
+        - Go to File > Project Structure > Project
+        - Set SDK = Newly downloaded JDK
+    - Setup Gradle
+        - Go to File > Settings > Build, Execution, Deployment > Gradle
+        - Set Gradle JVM = Project SDK ---> This should show newly downloaded JDK.
 - Install node.js latest (Needed for MCP tutorial) https://nodejs.org/en/download/
-- Have a IDE that supports Java, Gradle & Spring Boot
-- Import this project into your IDE as gradle project
-- Add application-dev.properties & make sure it has all API keys
+- Get additional files:
+    - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
+    - Add mcp-servers-config.json to "src/main/resources" & change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
 
 ```terminal
 C:\Users\ravik>npm -v
@@ -33,6 +55,10 @@ Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-
 - **Function calling**: Allows models to call external APIs and services.
 - **Standardization**: Provides consistent API calls across different platforms.
 - **Extensibility**: Facilitates adding custom tools and modules.
+
+### References:
+https://docs.spring.io/spring-ai/reference/index.html  
+https://docs.langchain4j.dev/intro  
 
 -----
 -----
