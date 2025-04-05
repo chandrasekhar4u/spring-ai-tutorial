@@ -1,5 +1,5 @@
 
-# Tutorials
+# Setup
 
 ## Completed Pre-steps (Only FYI)
 - Acquired API keys for OpenAI & Claude
@@ -46,9 +46,6 @@ C:\Users\ravik>npx -v
 11.2.0
 ```
 
-> [!NOTE]
-> [Explain Basic concepts](./Concepts.md#basics)
-
 ## Libraries
 Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
 
@@ -63,8 +60,13 @@ Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-
 https://docs.spring.io/spring-ai/reference/index.html  
 https://docs.langchain4j.dev/intro  
 
+> [!NOTE]
+> [Explain Basic concepts](./Concepts.md#basics)
+
 -----
 -----
+
+# Tutorials
 
 ## Tutorial_1_0_SimplePrompt
 > [!NOTE]
@@ -72,7 +74,7 @@ https://docs.langchain4j.dev/intro
 ### Highlights
 - Simple single prompt input & single output
 - No memory
-- PROMPT = user input
+- LLM Request = user input
 
 ### Sequence Diagram
 ```mermaid
@@ -102,7 +104,7 @@ sequenceDiagram
 
 ### Highlights
 - Add system instructions either at client level or at each prompt.
-- PROMPT = user input + system prompt
+- LLM Request = user input + system prompt
 
 ### Sequence Diagram
 ```mermaid
@@ -130,6 +132,7 @@ sequenceDiagram
 
 ### Highlights
 - Control different configurations of LLM to control generation.
+- LLM Request = user input + system prompt + configurations
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1)\
@@ -147,7 +150,7 @@ sequenceDiagram
 
 ### Highlights
 - Add memory so that previous context can be retained & passed to LLM with every prompt.
-- PROMPT = user input + Prior questions & answers
+- LLM Request = user input + Prior questions & answers
 
 
 ### Sequence Diagram
@@ -186,7 +189,7 @@ sequenceDiagram
 ### Highlights
 - Add RAG so that it can use knowledge internal to organization.
 - Similarity matched vector data will be sent with the prompt.
-- PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise
+- LLM Request = user input + Prior questions & answers + retrieved data from vector database + default advise
 
 ### Sequence Diagram
 ```mermaid
@@ -229,7 +232,7 @@ sequenceDiagram
 
 ### Highlights
 - Custom advise about how to use RAG data
-- PROMPT = user input + Prior questions & answers + retrieved data from vector database + custom advise
+- LLM Request = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
 ## Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel
 
@@ -272,10 +275,10 @@ sequenceDiagram
 - Add 'Tools' so that actions can be performed.
 - LLM can't perform action but it can decide & instruct back to execute action along with inputs for action.
 - Spring generates schema for input to the tool
-- CALL 1 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + tools, their description & input/output structure
+- CALL 1 LLM Request = user input + Prior questions & answers + retrieved data from vector database + default advise + tools, their description & input/output structure
 - CALL 1 RESPONSE = Instruction to execute tool & input JSON for tool. (THIS RESPONSE IS NOT RETURNED TO USER)
 - TOOL - Execute tool, get response & call LLM again
-- CALL 2 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
+- CALL 2 LLM Request = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
 - CALL 2 RESPONSE = final response which can be give back to user
 
 ### Sequence Diagram
