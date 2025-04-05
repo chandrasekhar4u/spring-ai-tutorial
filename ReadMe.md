@@ -143,7 +143,7 @@ sequenceDiagram
 
 ### Try on your own
   - Try changing values of configurations
-  - Add more code for other configurations & try out hwo they control genration.
+  - Add more code for other configurations & try out how they control genration.
   
 
 ## Tutorial_2_PromptWithContext
@@ -182,7 +182,7 @@ sequenceDiagram
 
 
 ### Try on your own
-  - Make memory separate my user (Hint: conversation id)
+  - Make memory separate my user (Hint: conversation id. Lookup spring documentation for chat_memory_conversation_id)
   
 ## Tutorial_3_0_PromptWithContextAndRag
 
