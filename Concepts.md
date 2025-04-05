@@ -15,8 +15,16 @@
 - Non-deterministic & Less predictable
 
 ## LLM considerations
-- Cost by tokens in input & output. Optimize prompts. Restrict inputs.
-- Not inherently secure. Watch what flows to LLM.
+- **Token usage**
+    - Tokens can be thought of as pieces of words.
+      - https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+      - 1 token ~= 4 chars in English
+      - 1-2 sentence ~= 30 tokens
+    - Cost by tokens in input & output.
+    - Optimize prompts. Restrict inputs.
+- **Security**
+  - Not inherently secure.
+  - Watch what flows to LLM.
 
 ## To show
 - OpenAI usage & budget in their online dashboard - https://platform.openai.com/settings/organization/usage
@@ -24,21 +32,16 @@
 - Terminal logs to see the data flow.
   
 
-
-
 -----
 
 # Prompts
 
-- **User Prompt:**
+- **"User" Prompt:**
     - **Definition:** A **User Prompt** is a question or instruction given by the end user.
     - **Example:** “How can I use Spring AI in Java?”
     - The LLM processes this prompt to generate a relevant response.
     - **Use case:** Ask the model for information or specific tasks, like querying a database or generating a summary.
-- **Token**
-    - Tokens can be thought of as pieces of words. https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
-    - 1 token ~= 4 chars in English
-    - 1-2 sentence ~= 30 tokens
+
 
 > [!NOTE]
 > Go to tutorial 1
@@ -49,7 +52,7 @@
     - Reference https://cdn.openai.com/spec/model-spec-2024-05-08.html#follow-the-chain-of-command
     - Ordering of priorities - Platform (LLM Model) > Developer (System prompt) > User (User prompt) > Tool
 
-- **System Prompt / Developer prompt:**
+- **"System" Prompt / "Developer" prompt:**
     - **Definition:** A **System Prompt** is an instruction or context given to the LLM to guide how it should respond to user inputs.
     - Reference: https://platform.openai.com/docs/guides/prompt-engineering
     - **Example:** “You are an expert in Java programming.”
