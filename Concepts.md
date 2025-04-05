@@ -1,3 +1,8 @@
+
+> [!NOTE]
+> Explain pre-steps & setup in ReadMe. Also verify local setup.
+> [Pre Steps](./ReadMe.md#pre-steps)
+
 # Basics
 
 
@@ -19,9 +24,7 @@
 - Terminal logs to see the data flow.
   
 
-> [!NOTE]
-> Explain pre-steps in ReadMe. Also verify local setup.
-> [Pre Steps](./ReadMe.md#pre-steps)
+
 
 -----
 
