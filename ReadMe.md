@@ -274,7 +274,7 @@ sequenceDiagram
 [http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
 
 
-## Tutorial_4_0_PromptWithContextRagAndTools (Agentic AI)
+## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
 
 ### Highlights
 - Add 'Tools' so that actions can be performed.
@@ -339,6 +339,9 @@ sequenceDiagram
 - The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/5?userInput=write java code for bubble sort](http://localhost:8080/ai/spring/tutorial/5?userInput=write%20java%20code%20for%20bubble%20sort)   ----> Uses route of CLAUDE LLM    
+[http://localhost:8080/ai/spring/tutorial/5?userInput=does jupiter plant have rings](http://localhost:8080/ai/spring/tutorial/5?userInput=does%20jupiter%20plant%20have%20rings)  ----> Uses route of OPENAI LLM    
+
 
 ## Tutorial_6_0_AgenticEvaluatorOptimizer
 
