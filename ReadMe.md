@@ -235,10 +235,11 @@ sequenceDiagram
 - LLM Request = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
 
-## Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel
+## Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel
 
 ### Highlights
 - Use OpenAI embedding model to generate embeddings
+- Use MongoDB to store embedding & it's vector search to retrieval of data.
 - Try
   - Use embedding model to even generate embeddings of use prompt & then search for similarity.
 
