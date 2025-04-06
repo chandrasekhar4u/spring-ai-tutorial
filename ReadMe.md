@@ -11,7 +11,7 @@
 
 ## Setup
 - IDE
-    - Insall a IDE that supports Java, Gradle & Spring Boot
+    - Install a IDE that supports Java, Gradle & Spring Boot
     - IntelliJ Community Edition (Free)
         - Windows: https://www.jetbrains.com/idea/download/?section=windows
         - macOS: https://www.jetbrains.com/idea/download/?section=mac
