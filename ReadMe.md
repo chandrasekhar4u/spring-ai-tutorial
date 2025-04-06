@@ -234,6 +234,7 @@ sequenceDiagram
 - Custom advise about how to use RAG data
 - LLM Request = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
+
 ## Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel
 
 ### Highlights
@@ -268,6 +269,10 @@ sequenceDiagram
     SpringApp->>LLM: Combine Data with Prompt
     LLM->>User: Generate Response
 ```
+
+### Test
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
+
 
 ## Tutorial_4_0_PromptWithContextRagAndTools (Agentic AI)
 
