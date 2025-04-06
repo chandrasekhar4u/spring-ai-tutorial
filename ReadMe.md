@@ -280,7 +280,7 @@ sequenceDiagram
 [http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
 
 ### Try on your own
-  - Change mongo collection name by appending your full name to it (spring.ai.vectorstore.mongodb.collection-name). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. (FYI if you run server multiple times with tutorial.rag.first-time-load-data flag ON then it will multiple times insert data)
+  - Change mongo collection name by appending your full name to it (spring.ai.vectorstore.mongodb.collection-name). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. 
   - Create your own MongoDB Atlas instance. Create new database & new collection. Try adding embeddings in the new database & run RAG against that database.
 
 ## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
