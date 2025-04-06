@@ -344,12 +344,36 @@ sequenceDiagram
 ## Tutorial_5_0_AgenticRoutingWorkflow
 
 ### Highlights
-- The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input.
+- The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input. 
+
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp
+    participant RouterModel (GPT-4o-mini)
+    participant ClaudeLLM
+    participant OpenAILLM
+
+    User->>SpringApp: Send input question
+    SpringApp->>RouterModel (GPT-4o-mini): Decide Route for prompt (Coding-related?)
+    RouterModel (GPT-4o-mini)-->>SpringApp: Return "CLAUDE" or "OPENAI"
+
+    alt Response is CLAUDE
+        SpringApp->>ClaudeLLM: Forward user input
+        ClaudeLLM-->>SpringApp: Response
+    else Response is OPENAI
+        SpringApp->>OpenAILLM: Forward user input
+        OpenAILLM-->>SpringApp: Response
+    end
+
+    SpringApp-->>User: Final Answer
+
+```  
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/5?userInput=write java code for bubble sort](http://localhost:8080/ai/spring/tutorial/5?userInput=write%20java%20code%20for%20bubble%20sort)   ----> Uses route of CLAUDE LLM    
-[http://localhost:8080/ai/spring/tutorial/5?userInput=does jupiter plant have rings](http://localhost:8080/ai/spring/tutorial/5?userInput=does%20jupiter%20plant%20have%20rings)  ----> Uses route of OPENAI LLM    
-
+[http://localhost:8080/ai/spring/tutorial/5?userInput=does jupiter plant have rings](http://localhost:8080/ai/spring/tutorial/5?userInput=does%20jupiter%20plant%20have%20rings)  ----> Uses route of OPENAI LLM   
 
 ## Tutorial_6_0_AgenticEvaluatorOptimizer
 
@@ -357,7 +381,37 @@ sequenceDiagram
 - The Evaluator-Optimizer pattern implements a dual-LLM process where one model generates responses while another provides evaluation and feedback in an iterative loop, similar to a human writer's refinement process
 - Use multiple models to review & optimize inputs
 
+### Sequence Diagram
+```mermaid
+
+sequenceDiagram
+    participant User
+    participant SpringApp
+    participant ClaudeLLM
+    participant OpenAILLM
+
+    User->>SpringApp: Send input question
+    SpringApp->>OpenAILLM: Generate initial response
+    ClaudeLLM-->>SpringApp: Initial response
+
+    SpringApp->>ClaudeLLM: Review OpenAI’s response with review prompt
+    OpenAILLM-->>SpringApp: Review feedback / revision instructions
+
+    SpringApp->>OpenAILLM: Revise response using Claude's instructions
+    ClaudeLLM-->>SpringApp: Final optimized response
+
+    SpringApp-->>User: Final Answer
+
+```  
+
 ### Test
+[http://localhost:8080/ai/spring/tutorial/6?userInput=write a jdbc code to get count of employees by department](http://localhost:8080/ai/spring/tutorial/6?userInput=write%20a%20jdbc%20code%20to%20get%20count%20of%20employees%20by%20department)  
+
+[http://localhost:8080/ai/spring/tutorial/6?userInput=write a java code that takes a list of numbers and returns a new list containing only the even numbers from the original list](http://localhost:8080/ai/spring/tutorial/6?userInput=write%20a%20java%20code%20that%20takes%20a%20list%20of%20numbers%20and%20returns%20a%20new%20list%20containing%20only%20the%20even%20numbers%20from%20the%20original%20list)   
+
+[http://localhost:8080/ai/spring/tutorial/6?userInput=write short 10 line essay about black holes](http://localhost:8080/ai/spring/tutorial/6?userInput=write%20short%2010%20line%20essay%20about%20black%20holes)   
+ 
+
 
 ## Tutorial_7_0_Observability.java
 
@@ -401,6 +455,35 @@ flowchart LR
     Chat_Client -->|Tools Callback Provider| MCP_Client
     MCP_Client -->|Communicates with| MCP_Server
     MCP_Server -->|Integrates with| E["Brave Search API"]
+
+
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring App (MCP Host)
+    participant MCPClient as MCP Client (Spring AI)
+    participant LLM as Language Model (LLM - GPT/Claude/etc.)
+    participant MCPServer as MCP Server (Tool Server)
+    participant BraveSearch as Brave Search Backend
+
+    User->>SpringApp: Send prompt (question/request)
+    SpringApp->>MCPClient: Pass user input
+    MCPClient->>LLM: Send MCP-compliant message
+    LLM-->>MCPClient: Return response or tool call
+
+    alt Tool Needed
+        MCPClient->>MCPServer: Call tool API (e.g., search)
+        MCPServer->>BraveSearch: Query search backend
+        BraveSearch-->>MCPServer: Return search results
+        MCPServer-->>MCPClient: Return tool response
+        MCPClient->>LLM: Provide tool response as context
+        LLM-->>MCPClient: Return final response
+    end
+
+    MCPClient-->>SpringApp: Return LLM response
+    SpringApp-->>User: Show result
 
 
 ```
