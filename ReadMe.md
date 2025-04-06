@@ -33,7 +33,12 @@
     - Setup Gradle
         - Go to File > Settings > Build, Execution, Deployment > Gradle
         - Set Gradle JVM = Project SDK ---> This should show newly downloaded JDK.
-- Install node.js latest (Needed for MCP tutorial) https://nodejs.org/en/download/
+- Install node.js latest
+    - This is needed for MCP tutorial. If you don't have this then you can skip MCP tutorial.
+    - https://nodejs.org/en/download/
+- (Optional) Install MongoDB Compass
+    - This is not needed for execution of tutorial. In case you are interested in seeing MongoDB vector data for RAG tutorial then you can install this.
+    - https://www.mongodb.com/try/download/compass 
 - Get additional files:
     - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
     - Add mcp-servers-config.json to "src/main/resources" & change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
@@ -225,7 +230,7 @@ sequenceDiagram
 
 
 ### Try on your own
-  -
+  - Add more plan information in RAG data & test user inputs.
   
 
 ## Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise
@@ -274,6 +279,9 @@ sequenceDiagram
 ### Test
 [http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
 
+### Try on your own
+  - Change mongo collection name by appending your full name to it (spring.ai.vectorstore.mongodb.collection-name). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. (FYI if you run server multiple times with tutorial.rag.first-time-load-data flag ON then it will multiple times insert data)
+  - Create your own MongoDB Atlas instance. Create new database & new collection. Try adding embeddings in the new database & run RAG against that database.
 
 ## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
 
@@ -319,7 +327,7 @@ sequenceDiagram
 
 
 ### Try on your own
-  -
+  - Add another hypothetical tool which can take year as input & return plans for that year. This is kind of reverse of current tool. As another trick, see if you can customize tool so that if year is not exact match then it cna return plan for nearest year.
 
 ## Tutorial_4_1_AgentToolForWeatherService
 
