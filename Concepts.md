@@ -237,6 +237,16 @@ Reference: https://platform.openai.com/docs/guides/moderation
 > [!NOTE]
 > Go to tutorial 9
 
+## Observability
+
+> [!NOTE]
+> Go to tutorial 7
+
+## Custom Model
+
+> [!NOTE]
+> Go to tutorial 8
+
 -----
 -----
 
@@ -334,15 +344,6 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 > Go to tutorial 10
 
 
-## Observability
-
-> [!NOTE]
-> Go to tutorial 7
-
-## Custom Model
-
-> [!NOTE]
-> Go to tutorial 8
 
 ## Langchain4j
 
