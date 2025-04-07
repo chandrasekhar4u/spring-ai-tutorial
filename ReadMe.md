@@ -1,20 +1,45 @@
 
-# Tutorials
+# Setup
 
-## Pre-steps
-- Get API keys for OpenAI & Claude
-- Add balance to account to make API calls
-- Create spring boot project with spring-ai-openai dependency
-- As per the model you want to sue, add specific dependencies like spring-ai-anthropic-spring-boot-starter & spring-ai-openai-spring-boot-starter
-- Add API keys in properties file.
+## Completed Pre-steps (Only FYI)
+- Acquired API keys for OpenAI & Claude
+- Added balance to account to make API calls
+- Created spring boot project with spring-ai-openai dependency
+- As per the model we want to use, added specific dependencies like spring-ai-anthropic-spring-boot-starter & spring-ai-openai-spring-boot-starter
+- Added API keys in properties file.
 - Sprig auto discovers & create ChatModel beans for configured models.
 
 ## Setup
+- IDE
+    - Install a IDE that supports Java, Gradle & Spring Boot
+    - IntelliJ Community Edition (Free)
+        - Windows: https://www.jetbrains.com/idea/download/?section=windows
+        - macOS: https://www.jetbrains.com/idea/download/?section=mac
+- Setup tutorial code
+    - If you have Git installed in your machine Clone this GitHub repository
+    - If you don't have Git installed, then get code using download ZIP option in GitHub
+    - Go to File > New > Project from Existing Sources > select the location where tutorial code has been cloned or downloaded.
+    - Select Gradle as a build tool option & then import project.
 - Install JDK 17 or latest
-- Install node.js latest (Needed for MCP tutorial) https://nodejs.org/en/download/
-- Have a IDE that supports Java, Gradle & Spring Boot
-- Import this project into your IDE as gradle project
-- Add application-dev.properties & make sure it has all API keys
+    - Getting JDK In IntelliJ:
+        - Go to File > Project Structure > Platform Settings > SDKs > Click + icon > Download JDK
+        - Set Version = 17
+        - Set Vendor = JetBrains Runtime (17.0.14)   ---> Version might differ, but take 17 or latest.
+        - Location = Keep default
+        - Download
+    - Setup Project SDK
+        - Go to File > Project Structure > Project
+        - Set SDK = Newly downloaded JDK
+    - Setup Gradle
+        - Go to File > Settings > Build, Execution, Deployment > Gradle
+        - Set Gradle JVM = Project SDK ---> This should show newly downloaded JDK.
+- Install node.js latest
+    - This is needed for MCP tutorial. If you don't have this then you can skip MCP tutorial.
+    - https://nodejs.org/en/download/
+- (Optional) Install MongoDB Compass
+    - This is not needed for execution of tutorial. In case you are interested in seeing MongoDB vector data for RAG tutorial then you can install this.
+    - https://www.mongodb.com/try/download/compass 
+
 
 ```terminal
 C:\Users\ravik>npm -v
@@ -23,6 +48,18 @@ C:\Users\ravik>npm -v
 C:\Users\ravik>npx -v
 11.2.0
 ```
+
+## Server startup
+- Get additional files:
+    - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
+    - Add mcp-servers-config.json to "src/main/resources" & change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
+- IntelliJ
+    - Go to Run > Edit Configurations > Click + icon > Select Application
+    - JDK = JDK 17
+    - -cp = spring-ai-app.main
+    - Main Class = com.itsallbinary.tutorial.ai.spring_ai_app.SpringAiAppApplication
+- Add VM Option to set dev profile:  -Dspring.profiles.active=dev
+- Add environment variable: BRAVE_API_KEY={{API key from application-dev.properties}}
 
 ## Libraries
 Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
@@ -34,8 +71,17 @@ Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-
 - **Standardization**: Provides consistent API calls across different platforms.
 - **Extensibility**: Facilitates adding custom tools and modules.
 
+### References:
+https://docs.spring.io/spring-ai/reference/index.html  
+https://docs.langchain4j.dev/intro  
+
+> [!NOTE]
+> [Explain Basic concepts](./Concepts.md#basics)
+
 -----
 -----
+
+# Tutorials
 
 ## Tutorial_1_0_SimplePrompt
 > [!NOTE]
@@ -43,7 +89,7 @@ Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-
 ### Highlights
 - Simple single prompt input & single output
 - No memory
-- PROMPT = user input
+- LLM Request = user input
 
 ### Sequence Diagram
 ```mermaid
@@ -66,13 +112,14 @@ sequenceDiagram
 
 
 ### Try on your own
+  - Try modifying code to use Anthropic Model. https://docs.spring.io/spring-ai/reference/api/chat/anthropic-chat.html#_sample_controller
   - Try different prompts
 
 ## Tutorial_1_1_SimplePromptAndSystemPrompt
 
 ### Highlights
 - Add system instructions either at client level or at each prompt.
-- PROMPT = user input + system prompt
+- LLM Request = user input + system prompt
 
 ### Sequence Diagram
 ```mermaid
@@ -93,12 +140,14 @@ sequenceDiagram
 
 ### Try on your own
   - Change system instructions to specify format of output you want like json or yaml or anything that you wish.
+  - Test chain of command. Give some restrictive system instructions & try giving conflicting prompt. For ex: Give system instructions to answer only about java but ask non java prompts. Test & make system instructions robust.
   - Langchain4j - Try adding system instructions
   
 ## Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations
 
 ### Highlights
 - Control different configurations of LLM to control generation.
+- LLM Request = user input + system prompt + configurations
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1)\
@@ -109,14 +158,14 @@ sequenceDiagram
 
 ### Try on your own
   - Try changing values of configurations
-  - Add more code for other configurations & try out hwo they control genration.
+  - Add more code for other configurations & try out how they control genration.
   
 
 ## Tutorial_2_PromptWithContext
 
 ### Highlights
 - Add memory so that previous context can be retained & passed to LLM with every prompt.
-- PROMPT = user input + Prior questions & answers
+- LLM Request = user input + Prior questions & answers
 
 
 ### Sequence Diagram
@@ -148,14 +197,14 @@ sequenceDiagram
 
 
 ### Try on your own
-  - Make memory separate my user (Hint: conversation id)
+  - Make memory separate my user (Hint: conversation id. Lookup spring documentation for chat_memory_conversation_id)
   
 ## Tutorial_3_0_PromptWithContextAndRag
 
 ### Highlights
 - Add RAG so that it can use knowledge internal to organization.
 - Similarity matched vector data will be sent with the prompt.
-- PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise
+- LLM Request = user input + Prior questions & answers + retrieved data from vector database + default advise
 
 ### Sequence Diagram
 ```mermaid
@@ -191,19 +240,21 @@ sequenceDiagram
 
 
 ### Try on your own
-  -
+  - Add more plan information in RAG data & test user inputs.
   
 
 ## Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise
 
 ### Highlights
 - Custom advise about how to use RAG data
-- PROMPT = user input + Prior questions & answers + retrieved data from vector database + custom advise
+- LLM Request = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
-## Tutorial_3_2_PromptWithContextAndRagWithEmbeddingModel
+
+## Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel
 
 ### Highlights
 - Use OpenAI embedding model to generate embeddings
+- Use MongoDB to store embedding & it's vector search to retrieval of data.
 - Try
   - Use embedding model to even generate embeddings of use prompt & then search for similarity.
 
@@ -235,16 +286,22 @@ sequenceDiagram
     LLM->>User: Generate Response
 ```
 
-## Tutorial_4_0_PromptWithContextRagAndTools (Agentic AI)
+### Test
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
+
+### Try on your own
+  - Create your own MongoDB Atlas instance. Create new database & new collection. Try adding embeddings in the new database & run RAG against that database. Change mongo details & collection name in properties file (spring.ai.vectorstore.mongodb.**). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. 
+
+## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
 
 ### Highlights
 - Add 'Tools' so that actions can be performed.
 - LLM can't perform action but it can decide & instruct back to execute action along with inputs for action.
 - Spring generates schema for input to the tool
-- CALL 1 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + tools, their description & input/output structure
+- CALL 1 LLM Request = user input + Prior questions & answers + retrieved data from vector database + default advise + tools, their description & input/output structure
 - CALL 1 RESPONSE = Instruction to execute tool & input JSON for tool. (THIS RESPONSE IS NOT RETURNED TO USER)
 - TOOL - Execute tool, get response & call LLM again
-- CALL 2 PROMPT = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
+- CALL 2 LLM Request = user input + Prior questions & answers + retrieved data from vector database + default advise + Tools response + tools, their description & input/output structure
 - CALL 2 RESPONSE = final response which can be give back to user
 
 ### Sequence Diagram
@@ -279,7 +336,7 @@ sequenceDiagram
 
 
 ### Try on your own
-  -
+  - Add another hypothetical tool which can take year as input & return plans for that year. This is kind of reverse of current tool. As another trick, see if you can customize tool so that if year is not exact match then it cna return plan for nearest year.
 
 ## Tutorial_4_1_AgentToolForWeatherService
 
@@ -297,9 +354,36 @@ sequenceDiagram
 ## Tutorial_5_0_AgenticRoutingWorkflow
 
 ### Highlights
-- The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input.
+- The Routing pattern implements intelligent task distribution, enabling specialized handling for different types of input. 
+
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp
+    participant RouterModel (GPT-4o-mini)
+    participant ClaudeLLM
+    participant OpenAILLM
+
+    User->>SpringApp: Send input question
+    SpringApp->>RouterModel (GPT-4o-mini): Decide Route for prompt (Coding-related?)
+    RouterModel (GPT-4o-mini)-->>SpringApp: Return "CLAUDE" or "OPENAI"
+
+    alt Response is CLAUDE
+        SpringApp->>ClaudeLLM: Forward user input
+        ClaudeLLM-->>SpringApp: Response
+    else Response is OPENAI
+        SpringApp->>OpenAILLM: Forward user input
+        OpenAILLM-->>SpringApp: Response
+    end
+
+    SpringApp-->>User: Final Answer
+
+```  
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/5?userInput=write java code for bubble sort](http://localhost:8080/ai/spring/tutorial/5?userInput=write%20java%20code%20for%20bubble%20sort)   ----> Uses route of CLAUDE LLM    
+[http://localhost:8080/ai/spring/tutorial/5?userInput=does jupiter plant have rings](http://localhost:8080/ai/spring/tutorial/5?userInput=does%20jupiter%20plant%20have%20rings)  ----> Uses route of OPENAI LLM   
 
 ## Tutorial_6_0_AgenticEvaluatorOptimizer
 
@@ -307,7 +391,37 @@ sequenceDiagram
 - The Evaluator-Optimizer pattern implements a dual-LLM process where one model generates responses while another provides evaluation and feedback in an iterative loop, similar to a human writer's refinement process
 - Use multiple models to review & optimize inputs
 
+### Sequence Diagram
+```mermaid
+
+sequenceDiagram
+    participant User
+    participant SpringApp
+    participant ClaudeLLM
+    participant OpenAILLM
+
+    User->>SpringApp: Send input question
+    SpringApp->>OpenAILLM: Generate initial response
+    ClaudeLLM-->>SpringApp: Initial response
+
+    SpringApp->>ClaudeLLM: Review OpenAI’s response with review prompt
+    OpenAILLM-->>SpringApp: Review feedback / revision instructions
+
+    SpringApp->>OpenAILLM: Revise response using Claude's instructions
+    ClaudeLLM-->>SpringApp: Final optimized response
+
+    SpringApp-->>User: Final Answer
+
+```  
+
 ### Test
+[http://localhost:8080/ai/spring/tutorial/6?userInput=write a jdbc code to get count of employees by department](http://localhost:8080/ai/spring/tutorial/6?userInput=write%20a%20jdbc%20code%20to%20get%20count%20of%20employees%20by%20department)  
+
+[http://localhost:8080/ai/spring/tutorial/6?userInput=write a java code that takes a list of numbers and returns a new list containing only the even numbers from the original list](http://localhost:8080/ai/spring/tutorial/6?userInput=write%20a%20java%20code%20that%20takes%20a%20list%20of%20numbers%20and%20returns%20a%20new%20list%20containing%20only%20the%20even%20numbers%20from%20the%20original%20list)   
+
+[http://localhost:8080/ai/spring/tutorial/6?userInput=write short 10 line essay about black holes](http://localhost:8080/ai/spring/tutorial/6?userInput=write%20short%2010%20line%20essay%20about%20black%20holes)   
+ 
+
 
 ## Tutorial_7_0_Observability.java
 
@@ -351,6 +465,35 @@ flowchart LR
     Chat_Client -->|Tools Callback Provider| MCP_Client
     MCP_Client -->|Communicates with| MCP_Server
     MCP_Server -->|Integrates with| E["Brave Search API"]
+
+
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring App (MCP Host)
+    participant MCPClient as MCP Client (Spring AI)
+    participant LLM as Language Model (LLM - GPT/Claude/etc.)
+    participant MCPServer as MCP Server (Tool Server)
+    participant BraveSearch as Brave Search Backend
+
+    User->>SpringApp: Send prompt (question/request)
+    SpringApp->>MCPClient: Pass user input
+    MCPClient->>LLM: Send MCP-compliant message
+    LLM-->>MCPClient: Return response or tool call
+
+    alt Tool Needed
+        MCPClient->>MCPServer: Call tool API (e.g., search)
+        MCPServer->>BraveSearch: Query search backend
+        BraveSearch-->>MCPServer: Return search results
+        MCPServer-->>MCPClient: Return tool response
+        MCPClient->>LLM: Provide tool response as context
+        LLM-->>MCPClient: Return final response
+    end
+
+    MCPClient-->>SpringApp: Return LLM response
+    SpringApp-->>User: Show result
 
 
 ```

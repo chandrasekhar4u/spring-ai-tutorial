@@ -1,3 +1,8 @@
+
+> [!NOTE]
+> Explain pre-steps & setup in ReadMe. Also verify local setup.
+> [Pre Steps](./ReadMe.md#pre-steps)
+
 # Basics
 
 
@@ -10,8 +15,16 @@
 - Non-deterministic & Less predictable
 
 ## LLM considerations
-- Cost by tokens in input & output. Optimize prompts. Restrict inputs.
-- Not inherently secure. Watch what flows to LLM.
+- **Token usage**
+    - Tokens can be thought of as pieces of words.
+      - https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+      - 1 token ~= 4 chars in English
+      - 1-2 sentence ~= 30 tokens
+    - Cost by tokens in input & output.
+    - Optimize prompts. Restrict inputs.
+- **Security**
+  - Not inherently secure.
+  - Watch what flows to LLM.
 
 ## To show
 - OpenAI usage & budget in their online dashboard - https://platform.openai.com/settings/organization/usage
@@ -19,23 +32,16 @@
 - Terminal logs to see the data flow.
   
 
-> [!NOTE]
-> Explain pre-steps in ReadMe. Also verify local setup.
-> [Pre Steps](./ReadMe.md#pre-steps)
-
 -----
 
 # Prompts
 
-- **User Prompt:**
+- **"User" Prompt:**
     - **Definition:** A **User Prompt** is a question or instruction given by the end user.
     - **Example:** “How can I use Spring AI in Java?”
     - The LLM processes this prompt to generate a relevant response.
     - **Use case:** Ask the model for information or specific tasks, like querying a database or generating a summary.
-- **Token**
-    - Tokens can be thought of as pieces of words. https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
-    - 1 token ~= 4 chars in English
-    - 1-2 sentence ~= 30 tokens
+
 
 > [!NOTE]
 > Go to tutorial 1
@@ -46,7 +52,7 @@
     - Reference https://cdn.openai.com/spec/model-spec-2024-05-08.html#follow-the-chain-of-command
     - Ordering of priorities - Platform (LLM Model) > Developer (System prompt) > User (User prompt) > Tool
 
-- **System Prompt / Developer prompt:**
+- **"System" Prompt / "Developer" prompt:**
     - **Definition:** A **System Prompt** is an instruction or context given to the LLM to guide how it should respond to user inputs.
     - Reference: https://platform.openai.com/docs/guides/prompt-engineering
     - **Example:** “You are an expert in Java programming.”
@@ -59,6 +65,18 @@
 
 > [!NOTE]
 > Go to tutorial 1.1
+
+### Types/Roles of messages in prompt
+
+| Role          | Description | OpenAI (GPT) | Anthropic (Claude) | Google Gemini | Mistral | LLaMA |
+|--------------|-------------|--------------|---------------------|---------------|---------|-------|
+| **System**   | Sets initial behavior, tone, or restrictions for the model. | ✅ Yes | ✅ Yes (Claude 3) | ✅ Yes | ✅ Yes | ✅ Yes |
+| **User**     | The main input message from the human user. | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Assistant** | The model's response to the user’s message. | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Tool**     | Special role for tool/function calling responses. The model outputs structured data for API calls. | ✅ Yes (Function Calling) | ✅ Yes (Tool Use) | ✅ Yes | ❌ No | ❌ No |
+| **Function** | Used in OpenAI for structured API responses when calling functions/tools. | ✅ Yes | ❌ No | ❌ No | ❌ No | ❌ No |
+| **System Instruction** | Similar to system role but used in some models for additional instructions. | ❌ No | ✅ Yes (Claude 3) | ✅ Yes | ❌ No | ❌ No |
+
 
 ### Prompt Caching
 
@@ -84,91 +102,33 @@
 
 When calling an **LLM (Large Language Model) API**, you send a request with configuration fields that control the model’s response.
 
-### Common Configuration Fields
 
-- **Temperature**
-  - Controls randomness.
-  - **Lower values (e.g., 0.2)** → More predictable, factual responses.
-  - **Higher values (e.g., 0.8)** → More creative and varied responses.
+| **Field** | **Description** | **Example Values** | **Supported in** |
+|-----------|----------------|-------------------|------------------|
+| **Max Tokens** | Sets the limit for how long the response can be. | Higher values → Longer responses (up to the model’s max limit). Lower values → Shorter, more concise answers. | All LLMs |
+| **Temperature** | Controls randomness in responses. | Lower values (e.g., `0.2`) → More predictable, factual responses. Higher values (e.g., `0.8`) → More creative and varied responses. | OpenAI, Claude, Gemini, LLaMA, Mistral |
+| **Top-P (Nucleus Sampling)** | Controls response diversity by setting a probability threshold. | Low values (e.g., `0.3`) → Model picks from the most likely words only. High values (e.g., `0.9`) → More diverse choices, increasing creativity. | OpenAI, Claude, Gemini, LLaMA |
+| **Streaming** | Sends responses in real-time instead of waiting for full output. | `true` → Response streams as it’s generated. `false` → Response is returned all at once. | OpenAI, Claude, Gemini |
+| **Context Window** | Determines how much past conversation the model remembers. | **Claude 3 Opus:** ~200K tokens. **GPT-4 Turbo:** ~128K tokens. **Gemini 1.5 Pro:** ~1M tokens. | Varies by model |
+| **Tool Calling (Function Calling)** | Allows the model to call external tools/APIs. | **OpenAI:** `"tools"` for function calling. **Gemini:** `"function calling"`. **Claude:** `"tool use"`. | OpenAI, Claude, Gemini |
+| **Safety Settings** | Sets filtering levels for harmful content. | `"low"`, `"medium"`, `"high"` → Controls strictness of content moderation. | OpenAI, Claude, Gemini |
+| **Top-K** | Limits how many top word choices the model considers at each step. | `Top-K = 40` → Model picks the next word from the **top 40 most likely words**. Lower values (e.g., `5`) → More deterministic. Higher values (e.g., `100`) → More creative but riskier outputs. | LLaMA, Gemini, Claude |
+| **Stop Sequences** | Defines words/phrases that will make the response stop early. | Example: Setting `["###"]` as a stop sequence ensures the response ends before encountering `"###"`. | OpenAI, Claude, Gemini |
+| **Frequency Penalty** | Discourages repetition of words/phrases. | Higher values (e.g., `2.0`) → Less repetition, more varied language. Lower values (e.g., `0.0`) → May repeat phrases more often. | OpenAI, Gemini |
+| **Presence Penalty** | Encourages new topics by discouraging words already used. | Higher values (e.g., `2.0`) → Model is more likely to introduce new ideas. Lower values (e.g., `0.0`) → Sticks to the main topic more. | OpenAI |
+| **Seed** | Fixes randomness so the same input always gives the same response. | Setting `42` as a seed ensures the same reply each time for reproducibility. | OpenAI, Claude, Gemini, LLaMA |
+| **Repetition Penalty** | Reduces the likelihood of repeating words or phrases. | Higher values (e.g., `2.0`) → Avoids repetition. Lower values (e.g., `1.0`) → Allows natural repetition. | Gemini, LLaMA |
+| **Response Format** | Specifies output as plain text or structured data (e.g., JSON). | `"json"` → Ensures output follows JSON rules. `"text"` → Regular natural language output. | OpenAI, Gemini |
+| **Logit Bias** | Allows boosting or suppressing specific words/tokens. | Example: You can bias the model to prefer `"yes"` over `"no"`. | OpenAI, Claude, Gemini |
+| **Temperature Decay** | Gradually lowers the temperature as the model generates output. | Example: Starts at `0.8` (creative) and decreases to `0.2` (factual) over a long response. | LLaMA, some custom APIs |
+| **Penalty Alpha** | Adjusts how much the model penalizes repetitive outputs. | Example: Higher values make responses more diverse by discouraging repetition. | Anthropic Claude |
 
-- **Top-P (Nucleus Sampling)**
-  - Controls response diversity by setting a probability threshold.
-  - **Low values (e.g., 0.3)** → Model picks from the most likely words only.
-  - **High values (e.g., 0.9)** → More diverse choices, increasing creativity.
-  - Works similarly to **temperature** but in a different way (usually adjust only one).
 
-- **Max Tokens**
-  - Sets the limit for how long the response can be.
-  - **Higher values** → Longer responses (up to the model’s max limit).
-  - **Lower values** → Shorter, more concise answers.
+**Notes:**  
+- **Adjust either Temperature or Top-P**, not both together.  
+- **Stop Sequences** help in formatting structured output.  
+- **Repetition & Frequency Penalties** are useful for making responses more natural.  
 
-- **Frequency Penalty**
-  - Discourages repetition of words/phrases.
-  - **Higher values** → Less repetition, more varied language.
-  - **Lower values** → May repeat phrases more often.
-
-- **Presence Penalty**
-  - Encourages new topics by discouraging words already used.
-  - **Higher values** → Model is more likely to introduce new ideas.
-  - **Lower values** → Sticks to the main topic more.
-
-- **Top-K (Used in LLaMA, Gemini, Claude, etc.)**
-  - Limits how many top word choices the model considers at each step.
-  - **Top-K = 40** means the model picks the next word from the **top 40 most likely words**.
-  - **Lower values (e.g., 5)** → More deterministic.
-  - **Higher values (e.g., 100)** → More creative but riskier outputs.
-
-- **Stop Sequences**
-  - Defines words/phrases that will make the response stop early.
-  - Useful for controlling response length or ensuring structured output.
-
-### Less Common / Model-Specific Fields
-
-- **Logit Bias (*OpenAI, Claude, Gemini*)**
-  - Allows boosting or suppressing specific words/tokens.
-  - Example: You can bias the model to prefer `"yes"` over `"no"`.
-
-- **Repetition Penalty (*Google Gemini, LLaMA*)**
-  - Similar to **frequency penalty** but applied differently.
-  - Reduces the likelihood of repeating words or phrases.
-  - **Higher values** → Avoids repetition.
-
-- **Seed (*Claude, OpenAI, Gemini, LLaMA*)**
-  - Fixes randomness so that the same input always gives the same response.
-  - Useful for reproducible results in testing environments.
-
-- **Streaming (*OpenAI, Claude, Gemini*)**
-  - If enabled, the model sends partial responses as it generates them (instead of waiting for the full response).
-  - Used for chat apps to display text in real-time.
-
-- **Response Format (*OpenAI, Gemini*)**
-  - Lets you control whether the response is returned as plain text or structured (like JSON).
-  - OpenAI supports `"response_format": "json"`, ensuring the output follows JSON rules.
-
-- **Tool Calling (Function Calling) (*OpenAI, Gemini, Claude*)**
-  - Allows the model to call external tools/functions.
-  - **OpenAI:** Function calling (`"tools"`)
-  - **Anthropic Claude:** Tool Use
-  - **Gemini:** Function calling
-  - Useful for integrating with APIs, calculators, or databases.
-
-- **Safety Settings (*Google Gemini, Claude, OpenAI*)**
-  - Allows setting strictness levels for filtering harmful or inappropriate content.
-  - Example: `"safety_settings": { "harassment": "high" }` in Gemini.
-
-- **Context Window (varies by model)**
-  - Not a request field but an important limitation.
-  - Determines how much past conversation the model remembers.
-    - **Claude 3 Opus:** ~200K tokens
-    - **GPT-4 Turbo:** ~128K tokens
-    - **Gemini 1.5 Pro:** ~1M tokens
-
-- **Temperature Decay (*LLaMA, some custom APIs*)**
-  - Gradually lowers the temperature as the model generates output.
-  - Helps keep responses structured while allowing creativity at the start.
-
-- **Penalty Alpha (*Anthropic Claude*)**
-  - Adjusts how much the
 
 > [!NOTE]
 > Go to tutorial 1.2
@@ -342,7 +302,34 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 
 ## Model Context Protocol
 
+### What is Model Context Protocol (MCP)
+- With rise of agentic AI, lot of Agents are being developed all over for integrating with several tools, APIs etc.
+- Instead of everyone creating agents from scratch, MCP standardizes a protocol to develop MCP servers & share.
+- MCP protocol defines standard way in which MCP host, MCP client & MCP server interact with each other.
+- This way MCP server & clients are plug & play
 
+### **MCP Host**
+  - The main application that hosts and coordinates the flow between user input, LLM, and tool execution.
+  - Example: IDE, Desktop Application like Claude Desktop, Spring application
+
+### **MCP Client**
+  - Part of Spring AI, it wraps LLMs (e.g., OpenAI, Claude) and handles:
+    - Prompt formatting (MCP-compliant)
+    - Routing messages to LLM
+    - Parsing tool requests/responses
+    - Interacting 1:1 with MCP server.
+- Example: https://modelcontextprotocol.io/clients
+
+### **MCP Server**
+  - A server component that exposes tools/functions (e.g., Brave Search, Calculators).
+  - Responds to tool calls triggered by LLMs & executes necessary actions or API calls.
+  - Example:
+      - https://github.com/modelcontextprotocol/servers  
+      - https://modelcontextprotocol.io/examples
+      - https://github.com/microsoft/playwright-mcp
+      - https://github.com/awslabs/mcp  
+
+  
 > [!NOTE]
 > Go to tutorial 10
 
