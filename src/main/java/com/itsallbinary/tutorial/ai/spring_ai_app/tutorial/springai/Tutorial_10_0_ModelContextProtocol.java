@@ -7,10 +7,12 @@ import io.modelcontextprotocol.spec.McpSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.ai.mcp.customizer.McpSyncClientCustomizer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@ConditionalOnProperty(name="tutorial.mcp.enable", havingValue = "true", matchIfMissing = true)
 public class Tutorial_10_0_ModelContextProtocol {
 
     private final ChatClient chatClient;
@@ -27,6 +30,7 @@ public class Tutorial_10_0_ModelContextProtocol {
             List<McpSyncClient> mcpSyncClients) {
         ChatClient.Builder chatClientBuilder = ChatClient
                 .builder(openAiChatModel)
+                .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultTools(new SyncMcpToolCallbackProvider(mcpSyncClients));
 
         this.chatClient = chatClientBuilder

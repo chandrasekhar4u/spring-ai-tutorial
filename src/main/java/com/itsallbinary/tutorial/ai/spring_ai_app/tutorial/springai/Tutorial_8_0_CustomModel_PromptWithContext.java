@@ -4,6 +4,7 @@ import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CustomChatModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class Tutorial_8_0_CustomModel_PromptWithContext {
                  */
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
+                        , new SimpleLoggerAdvisor()
                 )
                 .build();
     }

@@ -34,18 +34,12 @@ public class Tutorial_4_1_AgentToolForWeatherService {
 
 
         this.chatClient = chatClientBuilder
-                /*
-                Add advisor with in memory chat for storing context
-                 */
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
-                        /*
-                        Add logger to log details
-                         */
                         , new SimpleLoggerAdvisor()
                 )
-                /*
-                Add tool for getting current weather
+                /**
+                 * Add tool for getting current weather
                  */
                 .defaultTools(new WeatherServiceTool())
                 .build();
@@ -74,6 +68,12 @@ public class Tutorial_4_1_AgentToolForWeatherService {
 
 //        private static final String WEATHER_API_URL = "https://api.weather.gov/gridpoints/MTR/88,126/forecast";
 
+        /**
+         * This is free API provided by  National Weather Service (NWS)
+         * which is  an agency of the United States federal government
+         *
+         * https://www.weather.gov/documentation/services-web-api
+         */
         private static final String WEATHER_API_URL = "https://api.weather.gov/gridpoints/";
 
 
@@ -83,6 +83,13 @@ public class Tutorial_4_1_AgentToolForWeatherService {
             this.restTemplate = new RestTemplate();
         }
 
+        /**
+         * This Agent / Tool has bit complex input requireemnts.
+         *
+         * @param closestCityName - Enumerated input
+         * @param numberOfDaysFromToday - Numerical input
+         * @return
+         */
         @Tool(description = "Returns weather forecast for today or following week days. " )
         public String getWeather(@ToolParam(required = true, description = "Name of city " +
                 "from given enum which is closest to the name of the city user has given. ")

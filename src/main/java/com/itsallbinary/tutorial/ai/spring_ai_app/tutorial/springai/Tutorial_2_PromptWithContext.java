@@ -3,6 +3,7 @@ package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +25,8 @@ public class Tutorial_2_PromptWithContext {
                 Add advisor with in memory chat for storing context
                  */
                 .defaultAdvisors(
-                        new MessageChatMemoryAdvisor(new InMemoryChatMemory())
+                        new MessageChatMemoryAdvisor(new InMemoryChatMemory()),
+                        new SimpleLoggerAdvisor()
                 )
                 .build();
     }

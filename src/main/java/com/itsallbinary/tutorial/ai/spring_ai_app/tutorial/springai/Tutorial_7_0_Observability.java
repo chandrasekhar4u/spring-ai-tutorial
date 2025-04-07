@@ -32,7 +32,7 @@ import java.util.Map;
 @RestController
 public class Tutorial_7_0_Observability {
 
-    private static final Logger logger = LoggerFactory.getLogger(Tutorial_4_0_PromptWithContextRagAndTools.class);
+    private static final Logger logger = LoggerFactory.getLogger(Tutorial_7_0_Observability.class);
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -90,7 +90,7 @@ public class Tutorial_7_0_Observability {
                 /*
                 Add tool for getting current status
                  */
-                .defaultTools(new Tutorial_4_0_PromptWithContextRagAndTools.PlanStatusServiceTool())
+                .defaultTools(new Tutorial_4_0_PromptWithContextAndAgentTool.PlanStatusServiceTool())
                 .build();
     }
 

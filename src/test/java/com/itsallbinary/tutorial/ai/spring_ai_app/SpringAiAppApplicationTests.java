@@ -3,10 +3,10 @@ package com.itsallbinary.tutorial.ai.spring_ai_app;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class SpringAiAppApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

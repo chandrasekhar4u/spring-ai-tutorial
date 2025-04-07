@@ -2,6 +2,7 @@ package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.moderation.ModerationPrompt;
 import org.springframework.ai.moderation.ModerationResponse;
@@ -24,6 +25,7 @@ public class Tutorial_9_0_Moderation {
         ChatClient.Builder chatClientBuilder = ChatClient.builder(openAiChatModel);
 
         this.chatClient = chatClientBuilder
+                .defaultAdvisors(new SimpleLoggerAdvisor())
                 .build();
         this.openAiModerationModel = openAiModerationModel;
     }

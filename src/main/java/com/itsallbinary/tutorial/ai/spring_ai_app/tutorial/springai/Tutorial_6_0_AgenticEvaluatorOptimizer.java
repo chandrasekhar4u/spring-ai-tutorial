@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +35,7 @@ public class Tutorial_6_0_AgenticEvaluatorOptimizer {
                  */
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
+                        , new SimpleLoggerAdvisor()
                 );
 
         this.chatClientAnthropic = anthropicChatModelBuilder
@@ -45,7 +47,7 @@ public class Tutorial_6_0_AgenticEvaluatorOptimizer {
 
         String finalOutputToUi = "";
 
-        String responsePass1 = this.chatClientAnthropic.prompt()
+        String responsePass1 = this.chatClient.prompt()
                 .user(userInput)
                 .call()
                 .content();
@@ -53,11 +55,11 @@ public class Tutorial_6_0_AgenticEvaluatorOptimizer {
 
         finalOutputToUi = finalOutputToUi + CommonHelper.surroundMessageSection("PASS 1 OUTPUT", responsePass1);
 
-        String reviewResponse = this.chatClient.prompt()
+        String reviewResponse = this.chatClientAnthropic.prompt()
                 .system("You are a reviewer. User prompt contains user's input which tells what user wants. " +
                         "It also has output generated which you should review & see if it completely answers users ask. Also check if it it the best output possible." +
                         "In response provide clear instructions about what should be improved. Only give text instructions in output.")
-                .user("User asked for this ' "+ userInput + " '.  We have created answer or ouput which you can find below between ---- pattern\n"
+                .user("User asked for this ' "+ userInput + " '.  We have created answer or output which you can find below between ---- pattern\n"
                         + "----\n" + responsePass1 + "\n----\n")
                 .call()
                 .content();
@@ -66,7 +68,7 @@ public class Tutorial_6_0_AgenticEvaluatorOptimizer {
 
         finalOutputToUi = finalOutputToUi + CommonHelper.surroundMessageSection("PASS 1 REVIEW COMMENTS", reviewResponse);
 
-        String responsePass2 = this.chatClientAnthropic.prompt()
+        String responsePass2 = this.chatClient.prompt()
                 .system("You had already generated response for our input. We reviewed it & now we are giving instructions about how to improve the response. " +
                         "Please improve response & return updated answer.")
                 .user(reviewResponse)

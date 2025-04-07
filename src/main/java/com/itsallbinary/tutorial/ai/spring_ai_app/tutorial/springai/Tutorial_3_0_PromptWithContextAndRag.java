@@ -5,6 +5,7 @@ import com.itsallbinary.tutorial.ai.spring_ai_app.experiments.LocalEmbeddingMode
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.document.Document;
@@ -46,6 +47,7 @@ public class Tutorial_3_0_PromptWithContextAndRag {
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
                         , new QuestionAnswerAdvisor(vectorStore)
+                        , new SimpleLoggerAdvisor()
                 )
                 .build();
     }

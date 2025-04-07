@@ -2,6 +2,7 @@ package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,7 @@ public class Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations {
 
         ChatClient.Builder chatClientBuilder = ChatClient
                 .builder(openAiChatModel)
+                .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultSystem(SYSTEM_PROMPT);
 
         this.chatClient = chatClientBuilder.build();
