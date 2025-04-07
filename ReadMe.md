@@ -430,6 +430,8 @@ sequenceDiagram
 - Inspect (or log) usage like tokens etc.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/7?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/7?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+
 
 ## Tutorial_8_0_CustomModel_PromptWithContext.java
 
@@ -438,12 +440,17 @@ sequenceDiagram
 - Spring AI will provide all the functionalities like m=context memory, RAG integration tc.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/8?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/8?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+
 
 ## Tutorial_9_0_Moderation
 
 ### Highlights
+- Verify Moderation output & flags in the response.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/9?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/9?userInput=which%20planet%20is%20biggest%20in%20solar%20system)
+
 
 ## Tutorial_10_0_ModelContextProtocol
 
