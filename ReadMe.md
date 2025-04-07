@@ -39,9 +39,7 @@
 - (Optional) Install MongoDB Compass
     - This is not needed for execution of tutorial. In case you are interested in seeing MongoDB vector data for RAG tutorial then you can install this.
     - https://www.mongodb.com/try/download/compass 
-- Get additional files:
-    - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
-    - Add mcp-servers-config.json to "src/main/resources" & change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
+
 
 ```terminal
 C:\Users\ravik>npm -v
@@ -50,6 +48,18 @@ C:\Users\ravik>npm -v
 C:\Users\ravik>npx -v
 11.2.0
 ```
+
+## Server startup
+- Get additional files:
+    - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
+    - Add mcp-servers-config.json to "src/main/resources" & change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
+- IntelliJ
+    - Go to Run > Edit Configurations > Click + icon > Select Application
+    - JDK = JDK 17
+    - -cp = spring-ai-app.main
+    - Main Class = com.itsallbinary.tutorial.ai.spring_ai_app.SpringAiAppApplication
+- Add VM Option to set dev profile:  -Dspring.profiles.active=dev
+- Add environment variable: BRAVE_API_KEY={{API key from application-dev.properties}}
 
 ## Libraries
 Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
