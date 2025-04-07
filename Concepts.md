@@ -333,6 +333,22 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 > [!NOTE]
 > Go to tutorial 10
 
+
+## Observability
+
+> [!NOTE]
+> Go to tutorial 7
+
+## Custom Model
+
+> [!NOTE]
+> Go to tutorial 8
+
+## Langchain4j
+
+> [!NOTE]
+> Go to Langchani4j Tutorials
+
 ## Further Reading / Research
 - Learn about other models like audio, video, text to speech etc.
 - Learn about all MCP servers available out there like JetBrains, Microsoft, Jira etc.
