@@ -302,7 +302,34 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 
 ## Model Context Protocol
 
+### What is Model Context Protocol (MCP)
+- With rise of agentic AI, lot of Agents are being developed all over for integrating with several tools, APIs etc.
+- Instead of everyone creating agents from scratch, MCP standardizes a protocol to develop MCP servers & share.
+- MCP protocol defines standard way in which MCP host, MCP client & MCP server interact with each other.
+- This way MCP server & clients are plug & play
 
+### **MCP Host**
+  - The main application that hosts and coordinates the flow between user input, LLM, and tool execution.
+  - Example: IDE, Desktop Application like Claude Desktop, Spring application
+
+### **MCP Client**
+  - Part of Spring AI, it wraps LLMs (e.g., OpenAI, Claude) and handles:
+    - Prompt formatting (MCP-compliant)
+    - Routing messages to LLM
+    - Parsing tool requests/responses
+    - Interacting 1:1 with MCP server.
+- Example: https://modelcontextprotocol.io/clients
+
+### **MCP Server**
+  - A server component that exposes tools/functions (e.g., Brave Search, Calculators).
+  - Responds to tool calls triggered by LLMs & executes necessary actions or API calls.
+  - Example:
+      - https://github.com/modelcontextprotocol/servers  
+      - https://modelcontextprotocol.io/examples
+      - https://github.com/microsoft/playwright-mcp
+      - https://github.com/awslabs/mcp  
+
+  
 > [!NOTE]
 > Go to tutorial 10
 
