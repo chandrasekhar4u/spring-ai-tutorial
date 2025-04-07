@@ -402,13 +402,13 @@ sequenceDiagram
 
     User->>SpringApp: Send input question
     SpringApp->>OpenAILLM: Generate initial response
-    ClaudeLLM-->>SpringApp: Initial response
+    OpenAILLM-->>SpringApp: Initial response
 
     SpringApp->>ClaudeLLM: Review OpenAI’s response with review prompt
-    OpenAILLM-->>SpringApp: Review feedback / revision instructions
+    ClaudeLLM-->>SpringApp: Review feedback / revision instructions
 
     SpringApp->>OpenAILLM: Revise response using Claude's instructions
-    ClaudeLLM-->>SpringApp: Final optimized response
+    OpenAILLM-->>SpringApp: Final optimized response
 
     SpringApp-->>User: Final Answer
 
