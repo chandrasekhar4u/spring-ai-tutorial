@@ -52,7 +52,7 @@ C:\Users\ravik>npx -v
 ## Server startup
 - Get additional files:
     - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
-    - https://1drv.ms/f/c/45c51075dd4f76ae/EsJW7ZDuhSxCoLv5OXtqX-sB9h-Y4a-P-xWGR14VWgd3Dg?e=8FnT3X    (Password will be provided in person durign tutorial)
+    - https://1drv.ms/f/c/45c51075dd4f76ae/EsJW7ZDuhSxCoLv5OXtqX-sB9h-Y4a-P-xWGR14VWgd3Dg?e=8FnT3X    (Password will be provided in person during tutorial)
     - In mcp-servers-config.json at "src/main/resources", change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
 - IntelliJ
     - Go to Run > Edit Configurations > Click + icon > Select Application
