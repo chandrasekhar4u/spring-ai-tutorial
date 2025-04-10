@@ -52,7 +52,8 @@ C:\Users\ravik>npx -v
 ## Server startup
 - Get additional files:
     - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
-    - Add mcp-servers-config.json to "src/main/resources" & change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
+    - https://1drv.ms/f/c/45c51075dd4f76ae/EsJW7ZDuhSxCoLv5OXtqX-sB9h-Y4a-P-xWGR14VWgd3Dg?e=8FnT3X
+    - In mcp-servers-config.json at "src/main/resources", change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
 - IntelliJ
     - Go to Run > Edit Configurations > Click + icon > Select Application
     - JDK = JDK 17
@@ -233,13 +234,15 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet)
+[http://localhost:8080/ai/spring/tutorial/3?userInput=Plan document for planet Jupiter](http://localhost:8080/ai/spring/tutorial/3?userInput=Plan%20document%20for%20planet%20Jupiter) ----> Use exact same sentence from document as query  
+[http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet) ----> Reword query to natural language   
 
 [http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter planet](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter%20planet)\
 [http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 
 
 ### Try on your own
+  - Test different queries with exact match vs. natual language queries to understand the need of better embeddings.
   - Add more plan information in RAG data & test user inputs.
   
 
@@ -287,9 +290,14 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)      
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=anything planned for enormous planet in our system](http://localhost:8080/ai/spring/tutorial/3.2?userInput=anything%20planned%20for%20enormous%20planet%20in%20our%20system) ----> Document has word 'Largest' but query has word 'enormous', still similarity search matches & returns results.     
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=For which all planets do we have plans](http://localhost:8080/ai/spring/tutorial/3.2?userInput=For%20which%20all%20planets%20do%20we%20have%20plans)
+ ----> Try with TopK = 1 & then again try with TopK = 3    
+
 
 ### Try on your own
+  - Try adjusting topK value & see how results are impacted.
   - Create your own MongoDB Atlas instance. Create new database & new collection. Try adding embeddings in the new database & run RAG against that database. Change mongo details & collection name in properties file (spring.ai.vectorstore.mongodb.**). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. 
 
 ## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
@@ -402,13 +410,13 @@ sequenceDiagram
 
     User->>SpringApp: Send input question
     SpringApp->>OpenAILLM: Generate initial response
-    ClaudeLLM-->>SpringApp: Initial response
+    OpenAILLM-->>SpringApp: Initial response
 
     SpringApp->>ClaudeLLM: Review OpenAI’s response with review prompt
-    OpenAILLM-->>SpringApp: Review feedback / revision instructions
+    ClaudeLLM-->>SpringApp: Review feedback / revision instructions
 
     SpringApp->>OpenAILLM: Revise response using Claude's instructions
-    ClaudeLLM-->>SpringApp: Final optimized response
+    OpenAILLM-->>SpringApp: Final optimized response
 
     SpringApp-->>User: Final Answer
 
@@ -430,6 +438,8 @@ sequenceDiagram
 - Inspect (or log) usage like tokens etc.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/7?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/7?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+
 
 ## Tutorial_8_0_CustomModel_PromptWithContext.java
 
@@ -438,12 +448,17 @@ sequenceDiagram
 - Spring AI will provide all the functionalities like m=context memory, RAG integration tc.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/8?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/8?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+
 
 ## Tutorial_9_0_Moderation
 
 ### Highlights
+- Verify Moderation output & flags in the response.
 
 ### Test
+[http://localhost:8080/ai/spring/tutorial/9?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/9?userInput=which%20planet%20is%20biggest%20in%20solar%20system)
+
 
 ## Tutorial_10_0_ModelContextProtocol
 
