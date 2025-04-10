@@ -1,6 +1,7 @@
 package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
+import com.itsallbinary.tutorial.ai.spring_ai_app.common.MySpaceCompanyPlanRepository;
 import com.itsallbinary.tutorial.ai.spring_ai_app.experiments.LocalEmbeddingModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -28,24 +29,35 @@ public class Tutorial_3_0_PromptWithContextAndRag {
         ChatClient.Builder chatClientBuilder = ChatClient.builder(openAiChatModel);
 
         /**
-         * In memory Vector database
+         * In memory Vector database with own embedding model.
          */
         SimpleVectorStore vectorStore = SimpleVectorStore.builder(new LocalEmbeddingModel()).build();
         // MySpaceCompany internal knowledge
         List<Document> documents = List.of(
-                new Document("MySpaceCompany is planning to send a satellite to Jupiter in 2030.", Map.of("planet", "Jupiter")),
-                new Document("MySpaceCompany is planning to send a satellite to Mars in 2026.", Map.of("planet", "Mars")),
-                new Document("MySpaceCompany is helps control climate change through various programs.", Map.of("planet", "Earth"))
+                new Document(MySpaceCompanyPlanRepository.MYSPACECOMPANY_JUPITER_PLAN_DOCUMENT,
+                        Map.of("planet", "Jupiter")),
+                new Document(MySpaceCompanyPlanRepository.MYSPACECOMPANY_MARS_PLAN_DOCUMENT,
+                        Map.of("planet", "Mars")),
+                new Document(MySpaceCompanyPlanRepository.MYSPACECOMPANY_EARTH_PLAN_DOCUMENT,
+                        Map.of("planet", "Earth"))
         );
         // Store data in the vector store
         vectorStore.add(documents);
 
         this.chatClient = chatClientBuilder
-                /*
-                Add advisor with in memory chat for storing context
-                 */
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
+                        /**
+                         * This advisor does following,
+                         *
+                         * Retrieval: Converts user's input into embeddings using "SAME" model,
+                         * then searches MongoDB Atlas for similar embeddings using vector search,
+                         * then gets actual string text for matched results.
+                         *
+                         * Augmentation: It appends the retrieved data to user's prompt as context.
+                         *
+                         * Generation: Then it continues the chain so that request goes to LLM for generation.
+                         */
                         , new QuestionAnswerAdvisor(vectorStore)
                         , new SimpleLoggerAdvisor()
                 )

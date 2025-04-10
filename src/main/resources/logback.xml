@@ -7,6 +7,9 @@
     <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
     </root>
+
+    <logger name="org.mongodb.driver.cluster" level="INFO"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>APPLOG %d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>

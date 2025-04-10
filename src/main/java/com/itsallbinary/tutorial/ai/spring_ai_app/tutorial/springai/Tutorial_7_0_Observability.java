@@ -76,9 +76,6 @@ public class Tutorial_7_0_Observability {
 
 
         this.chatClient = chatClientBuilder
-                /*
-                Add advisor with in memory chat for storing context
-                 */
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
                         , questionAnswerAdvisor
@@ -87,9 +84,6 @@ public class Tutorial_7_0_Observability {
                          */
                         , new SimpleLoggerAdvisor()
                 )
-                /*
-                Add tool for getting current status
-                 */
                 .defaultTools(new Tutorial_4_0_PromptWithContextAndAgentTool.PlanStatusServiceTool())
                 .build();
     }

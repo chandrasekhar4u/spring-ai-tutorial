@@ -37,3 +37,5 @@ out/
 .vscode/
 /src/main/resources/application-dev.properties
 /logs
+/DO_NOT_CHECK_IN.txt
+/DO_NOT_COMMIT/

@@ -12,6 +12,25 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * LocalEmbeddingModel is an implementation of the EmbeddingModel interface.
+ * This class generates deterministic embeddings for text instructions or entire documents.
+ *
+ * The embeddings are generated using a simple hash-based technique where each text instruction
+ * is mapped to a fixed-size vector. While this method may be quick and efficient for certain applications,
+ * it does not capture semantic meaning of the text in a way that more advanced embedding models do.
+ *
+ * Key Methods:
+ * - call(EmbeddingRequest request): Generates embeddings for a list of text instructions.
+ * - embed(Document document): Generates a single embedding for a document.
+ * - generateFloatEmbedding(String text): Generates a fixed-size embedding vector for the given text.
+ * - normalizeVector(float[] vector): Normalizes the embedding vector to unit length.
+ *
+ * Note: This approach uses a deterministic method based on hash values and simple transformations.
+ * While this technique is fast and simple, more advanced methods like word2vec, BERT, etc.,
+ * can provide more semantically rich embeddings.
+ */
+
 @Component
 public class LocalEmbeddingModel implements EmbeddingModel {
     private static final Logger logger = LoggerFactory.getLogger(LocalEmbeddingModel.class);
@@ -41,21 +60,6 @@ public class LocalEmbeddingModel implements EmbeddingModel {
         logger.info("Generated document embedding successfully");
         return embedding;
     }
-
-    // Generates a float[] embedding for text
-/*    private float[] generateFloatEmbedding(String text) {
-        logger.debug("Generating random embedding vector for text: {}", text);
-
-        float[] vector = new float[VECTOR_SIZE];
-        Random rand = new Random(text.hashCode());
-
-        for (int i = 0; i < VECTOR_SIZE; i++) {
-            vector[i] = rand.nextFloat();
-        }
-
-        logger.debug("Generated vector: {}", vector);
-        return vector;
-    }*/
 
     private float[] generateFloatEmbedding(String text) {
         logger.debug("Generating deterministic embedding for text: {}", text);

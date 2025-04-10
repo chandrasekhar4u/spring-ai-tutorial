@@ -1,6 +1,7 @@
 package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
+import com.itsallbinary.tutorial.ai.spring_ai_app.common.MySpaceCompanyPlanRepository;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -29,8 +30,8 @@ public class Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel {
 
     private final MongoDBAtlasVectorStore mongoDBAtlasVectorStore;
 
-    @Value("${tutorial.rag.first-time-load-data}")
-    private String firstTimeLoadData;
+    @Value("${tutorial.rag.allow-load-data-to-vector-db}")
+    private String allowLoadDataToVectorDb;
 
     private static final String CUSTOM_USER_TEXT_ADVISE = """
 
@@ -50,8 +51,7 @@ public class Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel {
     public Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel(
             @Qualifier("openAiChatModel") ChatModel openAiChatModel,
             OpenAiEmbeddingModel openAiEmbeddingModel,
-            MongoDBAtlasVectorStore mongoDBAtlasVectorStore,
-            @Value("${tutorial.rag.first-time-load-data}") String firstTimeLoadData) {
+            MongoDBAtlasVectorStore mongoDBAtlasVectorStore) {
 
         /**
          * By default, spring uses OpenAI embedding model for MongoDB Atlas vector store.
@@ -70,15 +70,18 @@ public class Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel {
          * Augmentation: It appends the retrieved data to user's prompt as context.
          *
          * Generation: Then it continues the chain so that request goes to LLM for generation.
+         *
+         * Custom advise - Inform LLM how to use the data from context.
+         * TopK - Maximum number of nearest neighbor documents to return
          */
         QuestionAnswerAdvisor questionAnswerAdvisor = new QuestionAnswerAdvisor(mongoDBAtlasVectorStore,
-                SearchRequest.builder().build(), CUSTOM_USER_TEXT_ADVISE);
+                SearchRequest.builder().topK(1).build(), CUSTOM_USER_TEXT_ADVISE);
 
 
         this.chatClient = chatClientBuilder
                 .defaultAdvisors(
                         new MessageChatMemoryAdvisor(new InMemoryChatMemory())
-                        , questionAnswerAdvisor
+                                                , questionAnswerAdvisor
                         , new SimpleLoggerAdvisor()
                 )
                 .build();
@@ -105,7 +108,7 @@ public class Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel {
              * For tutorial purposes we have put in the same class & put it behind the flag.
              * Data has already been loaded in MongoDB so this code is for reference only.
              */
-            if (BooleanUtils.toBoolean(firstTimeLoadData)) {
+            if (BooleanUtils.toBoolean(allowLoadDataToVectorDb)) {
 
                 /**
                  * Clear all previous data to avoid duplicate data.
@@ -117,9 +120,12 @@ public class Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel {
                  */
                 // MySpaceCompany internal knowledge
                 List<Document> documents = List.of(
-                        new Document("MySpaceCompany is planning to send a satellite to Jupiter in 2030.", Map.of("planet", "Jupiter")),
-                        new Document("MySpaceCompany is planning to send a satellite to Mars in 2026.", Map.of("planet", "Mars")),
-                        new Document("MySpaceCompany is helps control climate change through various programs.", Map.of("planet", "Earth"))
+                        new Document(MySpaceCompanyPlanRepository.MYSPACECOMPANY_JUPITER_PLAN_DOCUMENT,
+                                Map.of("planet", "Jupiter")),
+                        new Document(MySpaceCompanyPlanRepository.MYSPACECOMPANY_MARS_PLAN_DOCUMENT,
+                                Map.of("planet", "Mars")),
+                        new Document(MySpaceCompanyPlanRepository.MYSPACECOMPANY_EARTH_PLAN_DOCUMENT,
+                                Map.of("planet", "Earth"))
                 );
                 // Store data in the vector store
                 mongoDBAtlasVectorStore.add(documents);
