@@ -234,13 +234,15 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet)
+[http://localhost:8080/ai/spring/tutorial/3?userInput=Plan document for planet Jupiter](http://localhost:8080/ai/spring/tutorial/3?userInput=Plan%20document%20for%20planet%20Jupiter) ----> Use exact same sentence from document as query  
+[http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet) ----> Reword query to natural language   
 
 [http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter planet](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter%20planet)\
 [http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 
 
 ### Try on your own
+  - Test different queries with exact match vs. natual language queries to understand the need of better embeddings.
   - Add more plan information in RAG data & test user inputs.
   
 
@@ -288,9 +290,14 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)   
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)      
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=anything planned for enormous planet in our system](http://localhost:8080/ai/spring/tutorial/3.2?userInput=anything%20planned%20for%20enormous%20planet%20in%20our%20system) ----> Document has word 'Largest' but query has word 'enormous', still similarity search matches & returns results.     
+[http://localhost:8080/ai/spring/tutorial/3.2?userInput=For which all planets do we have plans](http://localhost:8080/ai/spring/tutorial/3.2?userInput=For%20which%20all%20planets%20do%20we%20have%20plans)
+ ----> Try with TopK = 1 & then again try with TopK = 3    
+
 
 ### Try on your own
+  - Try adjusting topK value & see how results are impacted.
   - Create your own MongoDB Atlas instance. Create new database & new collection. Try adding embeddings in the new database & run RAG against that database. Change mongo details & collection name in properties file (spring.ai.vectorstore.mongodb.**). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. 
 
 ## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
