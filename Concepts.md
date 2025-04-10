@@ -204,6 +204,12 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
     Since `"AI"` and `"Machine Learning"` have **almost identical vectors**, they are **semantically close**.  
     But `"Banana"` is **far away**, meaning it has no relation to AI.  
 
+- **Similarity Search**
+  - Vector databases differ from traditional databases in the sense that they can search for similar text instead of exact match text.
+  - Ex: "Largest" & "Enormous" are similar words but not exact. Vector databases can match these wods due to similarity.
+  - **TopK** - topK is a parameter used in similarity search operations to specify the maximum number of nearest neighbor documents to return.
+  - http://docs.spring.io/spring-ai/reference/api/vectordbs/understand-vectordbs.html#vectordbs-similarity
+
 - **What to Watch For:**
   - **Data Privacy & Security:** Ensure that sensitive or confidential internal data is handled securely when using RAG.
   - **Relevance of Retrieved Data:** The quality of the response depends on the relevance of the data retrieved. Make sure the retrieval mechanism is well-tuned.
