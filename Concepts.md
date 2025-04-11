@@ -5,6 +5,27 @@
 
 # Basics
 
+```mermaid
+flowchart LR
+    User["🧑
+**Users**
+(e.g., ChatGPT Users, Customers, Content creators)"]
+    App["📍
+(YOU ARE HERE)
+ **AI Application**
+ Developer Perspective
+(e.g., Chatbots, AI Assistants, Smart Search)"]
+    Provider["🌐
+**LLM Provider**
+(e.g. OpenAI, Anthropic provides APIs)"]
+    Model["**🧠
+LLM Model**
+(e.g., GPT-4, Claude 3)"]
+
+    User --> App
+    App --> Provider
+    Provider --> Model
+```
 
 ## LLM Model Facts
 - No knowledge other than public data used to train it
