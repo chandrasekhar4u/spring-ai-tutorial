@@ -107,8 +107,6 @@ sequenceDiagram
 #### Spring
 [http://localhost:8080/ai/spring/tutorial/1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 [http://localhost:8080/ai/spring/tutorial/1?userInput=how many moons does it have](http://localhost:8080/ai/spring/tutorial/1?userInput=how%20many%20moons%20does%20it%20have) --> Does not remeber past conversation.  
-[http://localhost:8080/ai/spring/tutorial/1?userInput=what is the latest date till which you have learned knowledge](http://localhost:8080/ai/spring/tutorial/1?userInput=what%20is%20the%20latest%20date%20till%20which%20you%20have%20learned%20knowledge)  --> Find out LLM's knowledge cut off date.    
-
 
 #### Langchain4j
 [http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)
@@ -116,6 +114,7 @@ sequenceDiagram
 
 
 ### Try on your own
+  - Ask prompts to confirm the 'LLM Model Facts' that we went through
   - Try modifying code to use Anthropic Model. https://docs.spring.io/spring-ai/reference/api/chat/anthropic-chat.html#_sample_controller
   - Try different prompts
 
