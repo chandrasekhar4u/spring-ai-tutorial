@@ -324,6 +324,35 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 - MCP protocol defines standard way in which MCP host, MCP client & MCP server interact with each other.
 - This way MCP server & clients are plug & play
 
+```mermaid
+flowchart LR
+    subgraph Host Computer
+        Host["MCP Host (e.g., Claude Desktop, IDE, Spring AI Application)"]
+        Client["MCP Client (Manages connections to tools)"]
+    end
+
+    subgraph Server Environment["(Host computer or remote computer)"]
+        Server["MCP Server (Exposes capabilities)"]
+    end
+
+    subgraph Local_Environment
+        Local["Local Data Sources (Files, Databases)"]
+    end
+
+    subgraph External_Services
+        Remote["Remote Services (e.g., APIs)"]
+    end
+
+    Host --> Client
+    Client -->|stdio / sse| Server
+    Server --> Local
+    Server --> Remote
+
+
+```
+
+![MCP Spring Architecture](https://docs.spring.io/spring-ai/reference/_images/mcp/java-mcp-client-architecture.jpg)
+
 ### **MCP Host**
   - The main application that hosts and coordinates the flow between user input, LLM, and tool execution.
   - Example: IDE, Desktop Application like Claude Desktop, Spring application
@@ -337,6 +366,8 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 - Example: https://modelcontextprotocol.io/clients
 
 ### **MCP Server**
+  - Mainly this is just a integration code that integrates with Databases, APIs, File Systems etc. This integation code is wrapped with MCP server specification.
+  - Even if it says "Server", it can just be a terminal sub process running in the host computer.
   - A server component that exposes tools/functions (e.g., Brave Search, Calculators).
   - Responds to tool calls triggered by LLMs & executes necessary actions or API calls.
   - Example:
@@ -345,6 +376,18 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
       - https://github.com/microsoft/playwright-mcp
       - https://github.com/awslabs/mcp  
 
+### **Communication Modes**
+ - 🖥️ MCP "stdio" (Standard input output)
+     - MCP "stdio" lets the language model talk to tools by:
+     - Sending input as **JSON through standard input (stdin)**
+     - Receiving output as **JSON through standard output (stdout)**
+     - ✅ No HTTP, no network — just command-line I/O!
+     - ✅ Spring automatically handles launching stdio-based tools (e.g. npx commands) & communicates with that subprocess.
+ - 🌐 MCP sse (Server-Sent Events)
+     - 🌍 Communicates over HTTP using text/event-stream
+     - The tool receives a POST request with JSON input
+     - Sends streamed responses (via SSE) back to the LLM
+     - Spring sets up the HTTP POST request and reads streamed SSE responses.
   
 > [!NOTE]
 > Go to tutorial 10
