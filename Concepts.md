@@ -9,18 +9,18 @@
 flowchart LR
     User["🧑
 **Users**
-(e.g., ChatGPT Users, Customers, Content creators)"]
+(e.g., ChatGPT Users, Copilot users, Customers, Content creators)"]
     App["📍
 (YOU ARE HERE)
  **AI Application**
  Developer Perspective
-(e.g., Chatbots, AI Assistants, Smart Search)"]
+(e.g., Chatbots, Copilot, AI Assistants, Smart Search)"]
     Provider["🌐
 **LLM Provider**
-(e.g. OpenAI, Anthropic provides APIs)"]
+(e.g. OpenAI, Anthropic provides APIs, GitHub)"]
     Model["**🧠
 LLM Model**
-(e.g., GPT-4, Claude 3)"]
+(e.g., GPT-4, Claude 3, GPT-4o Copilot)"]
 
     User --> App
     App --> Provider
