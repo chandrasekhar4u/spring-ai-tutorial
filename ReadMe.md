@@ -353,6 +353,28 @@ sequenceDiagram
 ### Highlights
 - Add 'Tools' for weather service with little bit complex input schema
 
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant WeatherForecastTool as WeatherForecastTool (@Tool)
+    participant WeatherGovAPI as api.weather.gov/gridpoints
+    participant LLM
+
+    User->>SpringApp: Send Prompt (e.g., What's the weather in Phoenix tomorrow?)
+    SpringApp->>LLM: Send Request with Tool Definition (WeatherForecastTool)
+    LLM->>SpringApp: Send Tool Name & Input Parameters (city, day offset)
+    SpringApp->>WeatherForecastTool: Execute Tool with Input Parameters
+    WeatherForecastTool->>WeatherGovAPI: Fetch Forecast Data (city, days from today)
+    WeatherGovAPI->>WeatherForecastTool: Return Weather Forecast JSON
+    WeatherForecastTool->>SpringApp: Return Forecast Data
+    SpringApp->>LLM: Send Tool Call Result (Weather Info)
+    LLM->>SpringApp: Generate Final Response with Forecast
+    SpringApp->>User: Provide Response with Weather Forecast
+
+```
+
 ### Test
 [http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in san francisco](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20san%20francisco)\
 [http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in la](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20la)\
