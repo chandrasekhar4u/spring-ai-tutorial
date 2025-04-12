@@ -197,6 +197,8 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
   - **Step 3: Generate** a response by combining the augmented information with the user's prompt.
   - This process ensures that the model provides responses based on the most relevant, up-to-date, and specific data available.
 
+![Best way to store knowledgebase](/screenshots/file_vs_sql_vs_vector.png)
+
 - **Vector database:**
   - To store & retrieve internal knowledge base, vector database are preferred.
   - **Why not relational or NoSQL database?**
