@@ -214,18 +214,23 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
   - Embeddings are **high-dimensional numerical representations** of words, sentences, or documents.
   - Each number in an embedding vector represents a **learned feature** or **semantic aspect** of the input text. These features are **not explicitly interpretable** like words but capture **relationships, context, and meaning**.
   - Example: A Simplified 3D Embedding Space 
-    ```plaintext
-    "AI" → [0.9, 0.1, 0.8]
-    "Machine Learning" → [0.92, 0.12, 0.79] (very similar!)
-    "Banana" → [0.2, 0.8, 0.1] (totally different!)
-    ```
-    Here’s what **each dimension might represent** (hypothetically):  
-    - **First number (0.9)** → "Technology-related"  
-    - **Second number (0.1)** → "Food-related"  
-    - **Third number (0.8)** → "AI-specific"  
-    
-    Since `"AI"` and `"Machine Learning"` have **almost identical vectors**, they are **semantically close**.  
-    But `"Banana"` is **far away**, meaning it has no relation to AI.  
+
+**Vector Database**
+
+| Content              | Technology Score | Food Score | AI-Specific Score | Vector (Array Format)   |
+|----------------------|------------------|------------|--------------------|--------------------------|
+| **"AI"**             | 0.90             | 0.10       | 0.80               | [0.90, 0.10, 0.80]        |
+| **"Machine Learning"** | 0.92           | 0.12       | 0.79               | [0.92, 0.12, 0.79]        |
+| **"Banana"**         | 0.20             | 0.80       | 0.10               | [0.20, 0.80, 0.10]        |
+
+**User prompt** -->  **"Neural networks"** --> [0.91, 0.11, 0.78]
+
+| Content              | Similarity with "Neural networks"   | Vector (Array Format)   |
+|----------------------|-----------------------------------|--------------------------|
+| **"AI"**             | Very High ✅                       | [0.90, 0.10, 0.80]        |
+| **"Machine Learning"** | Very High ✅                    | [0.92, 0.12, 0.79]        |
+| **"Banana"**         | Very Low ❌                        | [0.20, 0.80, 0.10]        |
+
 
 - **Similarity Search**
   - Vector databases differ from traditional databases in the sense that they can search for similar text instead of exact match text.
