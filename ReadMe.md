@@ -259,6 +259,7 @@ sequenceDiagram
 
 ### Highlights
 - Custom advise about how to use RAG data
+- Use of "prompt template" for advise.
 - LLM Request = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
 
