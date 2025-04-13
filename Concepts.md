@@ -222,14 +222,17 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 | **"AI"**             | 0.90             | 0.10       | 0.80               | [0.90, 0.10, 0.80]        |
 | **"Machine Learning"** | 0.92           | 0.12       | 0.79               | [0.92, 0.12, 0.79]        |
 | **"Banana"**         | 0.20             | 0.80       | 0.10               | [0.20, 0.80, 0.10]        |
+| **"Smartphone"**     | 0.95             | 0.05       | 0.30               | [0.95, 0.05, 0.30]        |
+
 
 **User prompt** -->  **"Neural networks"** --> [0.91, 0.11, 0.78]
 
-| Content              | Similarity with "Neural networks"   | Vector (Array Format)   |
+| Content              | Similarity with "Neural networks" | Vector (Array Format)   |
 |----------------------|-----------------------------------|--------------------------|
 | **"AI"**             | Very High ✅                       | [0.90, 0.10, 0.80]        |
 | **"Machine Learning"** | Very High ✅                    | [0.92, 0.12, 0.79]        |
 | **"Banana"**         | Very Low ❌                        | [0.20, 0.80, 0.10]        |
+| **"Smartphone"**     | Moderate 🤔                        | [0.95, 0.05, 0.30]        |
 
 
 - **Similarity Search**
