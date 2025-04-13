@@ -1,6 +1,7 @@
 package com.itsallbinary.tutorial.ai.spring_ai_app.tutorial.springai;
 
 import com.itsallbinary.tutorial.ai.spring_ai_app.common.CommonHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
@@ -53,8 +54,23 @@ public class Tutorial_1_2_SimplePromptAndSystemPromptAndConfigurations {
 
         return CommonHelper.surroundMessage(
                 getClass(),
-                userInput,
+                userInput +
+                        formatRequestParams(temperature, maxTokens, topP, frequencyPenalty, presencePenalty),
                 aiResponse
         );
     }
+
+    public String formatRequestParams(Double temperature, Integer maxTokens,
+                                      Double topP, Double frequencyPenalty, Double presencePenalty) {
+        return String.format(
+                "\n\n\t[ Configurations ]\n\ttemperature=%s\n\tmaxTokens=%s" +
+                        "\n\ttopP=%s\n\tfrequencyPenalty=%s\n\tpresencePenalty=%s ]\n",
+                temperature,
+                maxTokens,
+                topP,
+                frequencyPenalty,
+                presencePenalty
+        );
+    }
+
 }
