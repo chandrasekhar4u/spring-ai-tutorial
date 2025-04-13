@@ -52,7 +52,7 @@ C:\Users\ravik>npx -v
 ## Server startup
 - Get additional files:
     - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
-    - https://1drv.ms/f/c/45c51075dd4f76ae/EsJW7ZDuhSxCoLv5OXtqX-sB9h-Y4a-P-xWGR14VWgd3Dg?e=8FnT3X
+    - https://1drv.ms/f/c/45c51075dd4f76ae/EsJW7ZDuhSxCoLv5OXtqX-sB9h-Y4a-P-xWGR14VWgd3Dg?e=8FnT3X    (Password will be provided in person during tutorial)
     - In mcp-servers-config.json at "src/main/resources", change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
 - IntelliJ
     - Go to Run > Edit Configurations > Click + icon > Select Application
@@ -107,12 +107,14 @@ sequenceDiagram
 #### Spring
 [http://localhost:8080/ai/spring/tutorial/1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
 [http://localhost:8080/ai/spring/tutorial/1?userInput=how many moons does it have](http://localhost:8080/ai/spring/tutorial/1?userInput=how%20many%20moons%20does%20it%20have) --> Does not remeber past conversation.  
+
 #### Langchain4j
 [http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/1?userInput=which%20planet%20is%20biggest%20in%20solar%20system)
 [http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how many moons does it have](http://localhost:8080/ai/langchain4j/tutorial/1?userInput=how%20many%20moons%20does%20it%20have) --> Does not remeber past conversation.  
 
 
 ### Try on your own
+  - Ask prompts to confirm the 'LLM Model Facts' that we went through
   - Try modifying code to use Anthropic Model. https://docs.spring.io/spring-ai/reference/api/chat/anthropic-chat.html#_sample_controller
   - Try different prompts
 
@@ -151,15 +153,15 @@ sequenceDiagram
 - LLM Request = user input + system prompt + configurations
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1)\
-[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.8](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.8)\
+[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.1)  
+[http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&temperature=0.8](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&temperature=0.8)    
 [http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&topP=0.9](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.9)\
 [http://localhost:8080/ai/spring/tutorial/1.2?userInput=what is time&topP=0.1](http://localhost:8080/ai/spring/tutorial/1.2?userInput=what%20is%20time&topP=0.1)
 
 
 ### Try on your own
   - Try changing values of configurations
-  - Add more code for other configurations & try out how they control genration.
+  - Add more code for other configurations & try out how they control generation.
   
 
 ## Tutorial_2_PromptWithContext
@@ -189,12 +191,16 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/2?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/2?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
-[http://localhost:8080/ai/spring/tutorial/2?userInput=how many moons does it have](http://localhost:8080/ai/spring/tutorial/2?userInput=how%20many%20moons%20does%20it%20have)\
-[http://localhost:8080/ai/spring/tutorial/2?userInput=name all moons](http://localhost:8080/ai/spring/tutorial/2?userInput=name%20all%20moons)\
-[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
-[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how many moons does it have](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how%20many%20moons%20does%20it%20have)\
-[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name all moons](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name%20all%20moons)\
+
+#### Spring
+[http://localhost:8080/ai/spring/tutorial/2?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/2?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+[http://localhost:8080/ai/spring/tutorial/2?userInput=how many moons does it have](http://localhost:8080/ai/spring/tutorial/2?userInput=how%20many%20moons%20does%20it%20have)  
+[http://localhost:8080/ai/spring/tutorial/2?userInput=name all moons](http://localhost:8080/ai/spring/tutorial/2?userInput=name%20all%20moons)  
+
+#### langchain4j
+[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how many moons does it have](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=how%20many%20moons%20does%20it%20have)  
+[http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name all moons](http://localhost:8080/ai/langchain4j/tutorial/2?userInput=name%20all%20moons)  
 
 
 ### Try on your own
@@ -234,11 +240,14 @@ sequenceDiagram
 ```
 
 ### Test
+
+#### spring
 [http://localhost:8080/ai/spring/tutorial/3?userInput=Plan document for planet Jupiter](http://localhost:8080/ai/spring/tutorial/3?userInput=Plan%20document%20for%20planet%20Jupiter) ----> Use exact same sentence from document as query  
 [http://localhost:8080/ai/spring/tutorial/3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet) ----> Reword query to natural language   
 
-[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter planet](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter%20planet)\
-[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
+#### langchain4j
+[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any plans for jupiter planet](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=any%20plans%20for%20jupiter%20planet)  
+[http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/3?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
 
 
 ### Try on your own
@@ -335,12 +344,14 @@ sequenceDiagram
 ```
 
 ### Test
-[http://localhost:8080/ai/spring/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
-[http://localhost:8080/ai/spring/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/spring/tutorial/4?userInput=any%20plans%20for%20this%20planet)\
 
+#### spring
+[http://localhost:8080/ai/spring/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/spring/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+[http://localhost:8080/ai/spring/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/spring/tutorial/4?userInput=any%20plans%20for%20this%20planet)  
 
-[http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)\
-[http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any%20plans%20for%20this%20planet)\
+#### langchain4j
+[http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which planet is biggest in solar system](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=which%20planet%20is%20biggest%20in%20solar%20system)  
+[http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any plans for this planet](http://localhost:8080/ai/langchain4j/tutorial/4?userInput=any%20plans%20for%20this%20planet)  
 
 
 ### Try on your own
@@ -350,6 +361,28 @@ sequenceDiagram
 
 ### Highlights
 - Add 'Tools' for weather service with little bit complex input schema
+
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant WeatherForecastTool as WeatherForecastTool (@Tool)
+    participant WeatherGovAPI as api.weather.gov/gridpoints
+    participant LLM
+
+    User->>SpringApp: Send Prompt (e.g., What's the weather in Phoenix tomorrow?)
+    SpringApp->>LLM: Send Request with Tool Definition (WeatherForecastTool)
+    LLM->>SpringApp: Send Tool Name & Input Parameters (city, day offset)
+    SpringApp->>WeatherForecastTool: Execute Tool with Input Parameters
+    WeatherForecastTool->>WeatherGovAPI: Fetch Forecast Data (city, days from today)
+    WeatherGovAPI->>WeatherForecastTool: Return Weather Forecast JSON
+    WeatherForecastTool->>SpringApp: Return Forecast Data
+    SpringApp->>LLM: Send Tool Call Result (Weather Info)
+    LLM->>SpringApp: Generate Final Response with Forecast
+    SpringApp->>User: Provide Response with Weather Forecast
+
+```
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/4.1?userInput=What is the weather in san francisco](http://localhost:8080/ai/spring/tutorial/4.1?userInput=What%20is%20the%20weather%20in%20san%20francisco)\
