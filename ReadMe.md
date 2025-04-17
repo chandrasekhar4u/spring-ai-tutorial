@@ -331,19 +331,27 @@ sequenceDiagram
     participant EmbeddingModel as Embedding Model
     participant VectorDB as Vector Database
 
-    SpringApp->>PDFReader: Read PDF Documents
-    PDFReader-->>SpringApp: Raw Documents
+    alt Extract Phase
+        SpringApp->>PDFReader: Read PDF Documents
+        PDFReader-->>SpringApp: Raw Documents
+    end
 
-    SpringApp->>Splitter: Split into Chunks
-    Splitter-->>SpringApp: Tokenized Chunks
+    alt Transform Phase
+        SpringApp->>Splitter: Split into Chunks
+        Splitter-->>SpringApp: Tokenized Chunks
 
-    SpringApp->>Metadata: Enrich with Keywords & Summaries
-    Metadata-->>SpringApp: Enriched Chunks
+        SpringApp->>Metadata: Add Keywords & Summaries
+        Metadata-->>SpringApp: Enriched Chunks
 
-    SpringApp->>EmbeddingModel: Generate Embeddings
-    EmbeddingModel-->>SpringApp: Vector Embeddings
+        SpringApp->>EmbeddingModel: Generate Embeddings
+        EmbeddingModel-->>SpringApp: Vector Embeddings
+    end
 
-    SpringApp->>VectorDB: Store Embeddings
+    alt Load Phase
+        SpringApp->>VectorDB: Store Embeddings
+    end
+
+
 
 ```
 
