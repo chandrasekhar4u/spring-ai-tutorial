@@ -322,7 +322,53 @@ sequenceDiagram
  
 ### Sequence Diagram
 
+```mermaid
+sequenceDiagram
+    participant SpringApp as Spring Application
+    participant PDFReader as PDF Reader
+    participant Splitter as Token Splitter
+    participant Metadata as Metadata Enricher
+    participant EmbeddingModel as Embedding Model
+    participant VectorDB as Vector Database
+
+    SpringApp->>PDFReader: Read PDF Documents
+    PDFReader-->>SpringApp: Raw Documents
+
+    SpringApp->>Splitter: Split into Chunks
+    Splitter-->>SpringApp: Tokenized Chunks
+
+    SpringApp->>Metadata: Enrich with Keywords & Summaries
+    Metadata-->>SpringApp: Enriched Chunks
+
+    SpringApp->>EmbeddingModel: Generate Embeddings
+    EmbeddingModel-->>SpringApp: Vector Embeddings
+
+    SpringApp->>VectorDB: Store Embeddings
+
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SpringApp as Spring Application
+    participant EmbeddingModel as Embedding Model
+    participant VectorDB as Vector Database
+    participant LLM as OpenAI ChatModel
+
+    User->>SpringApp: Send Prompt
+    SpringApp->>EmbeddingModel: Convert Prompt to Embedding
+    SpringApp->>VectorDB: Retrieve Relevant Chunks
+    SpringApp->>SpringApp: Inject Chunks as Context
+    SpringApp->>LLM: Send Prompt with Context
+    LLM-->>User: Generate Response
+
+```
+
 ### Test
+
+[http://localhost:8080/ai/spring/tutorial/3.3?userInput=what is the plan for jupiter planet](http://localhost:8080/ai/spring/tutorial/3.3?userInput=what%20is%20the%20plan%20for%20jupiter%20planet)
+[http://localhost:8080/ai/spring/tutorial/3.3?userInput=what challenges are expected for jupiter mission](http://localhost:8080/ai/spring/tutorial/3.3?userInput=what%20challenges%20are%20expected%20for%20jupiter%20mission)
+
 
 ## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
 
