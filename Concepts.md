@@ -151,6 +151,31 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 - **Repetition & Frequency Penalties** are useful for making responses more natural.  
 
 
+| Token       | Original Prob | Temp = 0.5 | Temp = 1.5 | Top-p = 0.9 |
+|-------------|----------------|------------|------------|-------------|
+| **"the"**     | 0.30           | 0.45       | 0.20       | 0.33        |
+| **"a"**       | 0.20           | 0.25       | 0.18       | 0.22        |
+| **"cat"**     | 0.10           | 0.12       | 0.15       | 0.11        |
+| **"banana"**  | 0.05           | 0.03       | 0.10       | 0.06        |
+| **"sky"**     | 0.03           | 0.01       | 0.08       | 0.04        |
+| **"explode"** | 0.01           | ~0.001     | 0.05       | ❌ Removed   |
+| **"others"**  | 0.31           | 0.139      | 0.24       | 0.24        |
+
+### 🔍 Sampling Controls Explained
+
+- **`Temperature `**
+    - Divide each logit by the temperature value.
+    - logit' = logit / temperature
+    - **`Temperature = 0.5`** → Sharper focus on most likely tokens  
+          - The model becomes more deterministic, favoring high-probability words.
+    - **`Temperature = 1.5`** → More randomness and creativity  
+          - The model explores less common words, producing more surprising outputs.
+
+- **`Top-p = 0.9`** → Only picks from top 90% cumulative probability  
+  The model removes the long tail of unlikely tokens and chooses from the top few.
+
+
+
 > [!NOTE]
 > Go to tutorial 1.2
 > [tutorial_1_2](./ReadMe.md#tutorial_1_2_simplepromptandsystempromptandconfigurations)
