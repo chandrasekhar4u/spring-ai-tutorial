@@ -259,6 +259,7 @@ sequenceDiagram
 
 ### Highlights
 - Custom advise about how to use RAG data
+- Use of "prompt template" for advise.
 - LLM Request = user input + Prior questions & answers + retrieved data from vector database + custom advise
 
 
@@ -267,8 +268,7 @@ sequenceDiagram
 ### Highlights
 - Use OpenAI embedding model to generate embeddings
 - Use MongoDB to store embedding & it's vector search to retrieval of data.
-- Try
-  - Use embedding model to even generate embeddings of use prompt & then search for similarity.
+- Use embedding model to even generate embeddings of use prompt & then search for similarity.
 
 ### Sequence Diagram
 ```mermaid
@@ -308,6 +308,21 @@ sequenceDiagram
 ### Try on your own
   - Try adjusting topK value & see how results are impacted.
   - Create your own MongoDB Atlas instance. Create new database & new collection. Try adding embeddings in the new database & run RAG against that database. Change mongo details & collection name in properties file (spring.ai.vectorstore.mongodb.**). Then in tutorial code add more data to Vector database. Turn on tutorial.rag.first-time-load-data flag. Then start server & test. 
+
+## Tutorial_3_3_RagWithETLPipeline
+
+### Highlights
+- E = Extracting
+    - Read data from Documents (.pdf, .docx, txt etc.) or web pages (HTML)
+- T = Transforming
+    - Splitting data into smaller searchable chunks
+    - Enriching data for better contet & better filtering
+- L = Loading
+    - Load transformed data into storage like vector database.
+ 
+### Sequence Diagram
+
+### Test
 
 ## Tutorial_4_0_PromptWithContextAndAgentTool (Agentic AI)
 

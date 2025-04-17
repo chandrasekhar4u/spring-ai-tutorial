@@ -151,6 +151,31 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 - **Repetition & Frequency Penalties** are useful for making responses more natural.  
 
 
+### 🔍 Sampling Controls Explained
+
+- **`Temperature `**
+    - Divide each logit by the temperature value.
+    - logit' = logit / temperature
+    - Apply softmax to get new probabilities.
+    - **`Temperature = 0.5`** → Sharper focus on most likely tokens  
+          - The model becomes more deterministic, favoring high-probability words.
+    - **`Temperature = 1.5`** → More randomness and creativity  
+          - The model explores less common words, producing more surprising outputs.
+
+- **`Top-p = 0.9`** → Only picks from top 90% cumulative probability  
+  The model removes the long tail of unlikely tokens and chooses from the top few.
+
+| Token       | Original Prob | Temp = 0.5 | Temp = 1.5 | Top-p = 0.9 |
+|-------------|----------------|------------|------------|-------------|
+| **"the"**     | 0.30           | 0.45       | 0.20       | 0.33        |
+| **"a"**       | 0.20           | 0.25       | 0.18       | 0.22        |
+| **"cat"**     | 0.10           | 0.12       | 0.15       | 0.11        |
+| **"banana"**  | 0.05           | 0.03       | 0.10       | 0.06        |
+| **"sky"**     | 0.03           | 0.01       | 0.08       | 0.04        |
+| **"explode"** | 0.01           | ~0.001     | 0.05       | ❌ Removed   |
+| **"others"**  | 0.31           | 0.139      | 0.24       | 0.24        |
+
+
 > [!NOTE]
 > Go to tutorial 1.2
 > [tutorial_1_2](./ReadMe.md#tutorial_1_2_simplepromptandsystempromptandconfigurations)
@@ -183,7 +208,14 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 > [!NOTE]
 > Go to tutorial 2
 
+## Further reading about Context Memory
+- Different chat memory storage solutions - Cassandra, Neo4j, JDBC
+- Context Window, Forgetting mechanism
+- Long Term memory
+
 -----
+
+
 
 # RAG
 
@@ -214,18 +246,26 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
   - Embeddings are **high-dimensional numerical representations** of words, sentences, or documents.
   - Each number in an embedding vector represents a **learned feature** or **semantic aspect** of the input text. These features are **not explicitly interpretable** like words but capture **relationships, context, and meaning**.
   - Example: A Simplified 3D Embedding Space 
-    ```plaintext
-    "AI" → [0.9, 0.1, 0.8]
-    "Machine Learning" → [0.92, 0.12, 0.79] (very similar!)
-    "Banana" → [0.2, 0.8, 0.1] (totally different!)
-    ```
-    Here’s what **each dimension might represent** (hypothetically):  
-    - **First number (0.9)** → "Technology-related"  
-    - **Second number (0.1)** → "Food-related"  
-    - **Third number (0.8)** → "AI-specific"  
-    
-    Since `"AI"` and `"Machine Learning"` have **almost identical vectors**, they are **semantically close**.  
-    But `"Banana"` is **far away**, meaning it has no relation to AI.  
+
+**Vector Database**
+
+| Content              | Technology Score | Food Score | AI-Specific Score | Vector (Array Format)   |
+|----------------------|------------------|------------|--------------------|--------------------------|
+| **"AI"**             | 0.90             | 0.10       | 0.80               | [0.90, 0.10, 0.80]        |
+| **"Machine Learning"** | 0.92           | 0.12       | 0.79               | [0.92, 0.12, 0.79]        |
+| **"Banana"**         | 0.20             | 0.80       | 0.10               | [0.20, 0.80, 0.10]        |
+| **"Smartphone"**     | 0.95             | 0.05       | 0.30               | [0.95, 0.05, 0.30]        |
+
+
+**User prompt** -->  **"Neural networks"** --> [0.91, 0.11, 0.78]
+
+| Content              | Similarity with "Neural networks" | Vector (Array Format)   |
+|----------------------|-----------------------------------|--------------------------|
+| **"AI"**             | Very High ✅                       | [0.90, 0.10, 0.80]        |
+| **"Machine Learning"** | Very High ✅                    | [0.92, 0.12, 0.79]        |
+| **"Banana"**         | Very Low ❌                        | [0.20, 0.80, 0.10]        |
+| **"Smartphone"**     | Moderate 🤔                        | [0.95, 0.05, 0.30]        |
+
 
 - **Similarity Search**
   - Vector databases differ from traditional databases in the sense that they can search for similar text instead of exact match text.
@@ -241,6 +281,11 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 
 > [!NOTE]
 > Go to tutorial 3
+
+## Further reading about Context Memory
+- Ranking / Reranking using models like Cohere to improve similarity
+- Different storages for RAG
+- Different chunking strategies
 
 -----
 
@@ -265,6 +310,10 @@ Reference: https://platform.openai.com/docs/guides/moderation
 
 > [!NOTE]
 > Go to tutorial 9
+
+### Further reading about Context Memory
+- More Guardrails mechanisms
+- PII data protection using Microsoft Presidio , Google Cloud Data Loss Prevention (DLP) 
 
 ## Observability
 
@@ -338,6 +387,13 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 
 > [!NOTE]
 > Go to tutorial 4
+
+#### Further reading about Context Memory
+- Computer Use mechanism provided by LLM
+- Claude Desktop for desktop automation
+
+----
+
 
 ## Model Context Protocol
 
