@@ -183,7 +183,14 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 > [!NOTE]
 > Go to tutorial 2
 
+## Further reading about Context Memory
+- Different chat memory storage solutions - Cassandra, Neo4j, JDBC
+- Context Window, Forgetting mechanism
+- Long Term memory
+
 -----
+
+
 
 # RAG
 
@@ -250,6 +257,11 @@ When calling an **LLM (Large Language Model) API**, you send a request with conf
 > [!NOTE]
 > Go to tutorial 3
 
+## Further reading about Context Memory
+- Ranking / Reranking using models like Cohere to improve similarity
+- Different storages for RAG
+- Different chunking strategies
+
 -----
 
 # Moderation
@@ -273,6 +285,10 @@ Reference: https://platform.openai.com/docs/guides/moderation
 
 > [!NOTE]
 > Go to tutorial 9
+
+### Further reading about Context Memory
+- More Guardrails mechanisms
+- PII data protection using Microsoft Presidio , Google Cloud Data Loss Prevention (DLP) 
 
 ## Observability
 
@@ -346,6 +362,13 @@ Reference: https://www.anthropic.com/engineering/building-effective-agents
 
 > [!NOTE]
 > Go to tutorial 4
+
+#### Further reading about Context Memory
+- Computer Use mechanism provided by LLM
+- Claude Desktop for desktop automation
+
+----
+
 
 ## Model Context Protocol
 
