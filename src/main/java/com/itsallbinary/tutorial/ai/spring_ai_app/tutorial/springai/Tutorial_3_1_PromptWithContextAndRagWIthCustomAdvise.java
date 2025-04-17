@@ -24,6 +24,12 @@ public class Tutorial_3_1_PromptWithContextAndRagWIthCustomAdvise {
 
     private final ChatClient chatClient;
 
+    /**
+     * This is custom advise telling LLM how to use retrieved data.
+     *
+     * This is a prompt template
+     * https://docs.spring.io/spring-ai/reference/api/prompt.html#_prompttemplate
+     */
     private static final String CUSTOM_USER_TEXT_ADVISE = """
 
 			Context information is below, surrounded by ---------------------

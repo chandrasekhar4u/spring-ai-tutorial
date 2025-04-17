@@ -55,6 +55,8 @@ dependencies {
 
 	implementation 'org.springframework.ai:spring-ai-mcp-client-spring-boot-starter'
 
+	implementation("org.springframework.ai:spring-ai-pdf-document-reader:1.0.0-M6")
+
 	implementation("org.springframework.ai:spring-ai-mongodb-atlas-store:1.0.0-M6")
 	implementation("com.google.code.gson:gson:2.12.1")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")

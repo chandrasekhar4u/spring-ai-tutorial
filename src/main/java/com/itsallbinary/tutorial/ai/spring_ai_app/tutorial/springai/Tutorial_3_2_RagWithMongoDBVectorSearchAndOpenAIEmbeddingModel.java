@@ -94,12 +94,11 @@ public class Tutorial_3_2_RagWithMongoDBVectorSearchAndOpenAIEmbeddingModel {
      * Loading of data in vector database is ideally an offline process.
      * For tutorial purposes we have put in the same class & put it behind the flag.
      * Data has already been loaded in MongoDB so this code is for reference only.
-     * @param userInput
      * @return
      */
     @GetMapping(CommonHelper.URL_PREFIX_FOR_SPRING + "tutorial/3.2/loadData")
-    String firstTimeLoadData(String userInput,
-                             @Value("${spring.ai.vectorstore.mongodb.collection-name}") String collectionName) {
+    String firstTimeLoadData(@Value("${spring.ai.vectorstore.mongodb.collection-name}")
+                             String collectionName) {
 
         try {
 

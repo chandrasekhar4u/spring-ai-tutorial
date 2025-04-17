@@ -1,5 +1,10 @@
 package com.itsallbinary.tutorial.ai.spring_ai_app.common;
 
+import org.springframework.ai.document.Document;
+import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
+
+import java.util.List;
+
 public class CommonHelper {
 
     public static final String URL_PREFIX_FOR_EXPERIMENTS = "/ai/exp/";
@@ -21,5 +26,13 @@ public class CommonHelper {
                 + OUTPUT_NEW_LINE
                 + "<span style=\"white-space: pre-line\">"+sectionData+"</span>"
                 + OUTPUT_NEW_LINE;
+    }
+
+    public static List<Document> getDocuments(String resourceUrl) {
+        // Step 1: Initialize the document reader for PDFs
+        PagePdfDocumentReader documentReader = new PagePdfDocumentReader(resourceUrl);
+        // Step 2: Read and transform the document into a list of Document objects
+        List<Document> documents = documentReader.read();
+        return documents;
     }
 }
