@@ -1,9 +1,7 @@
 
 # Setup
 
-## Completed Pre-steps (Only FYI)
-- Acquired API keys for OpenAI & Claude
-- Added balance to account to make API calls
+## Steps followed during project creation (Only FYI)
 - Created spring boot project with spring-ai-openai dependency
 - As per the model we want to use, added specific dependencies like spring-ai-anthropic-spring-boot-starter & spring-ai-openai-spring-boot-starter
 - Added API keys in properties file.
@@ -40,7 +38,7 @@
     - This is not needed for execution of tutorial. In case you are interested in seeing MongoDB vector data for RAG tutorial then you can install this.
     - https://www.mongodb.com/try/download/compass 
 
-
+Verify Node.js installation with below version commands.
 ```terminal
 C:\Users\ravik>npm -v
 11.2.0
@@ -49,18 +47,28 @@ C:\Users\ravik>npx -v
 11.2.0
 ```
 
+## Acquire keys & authentication details.
+
+> [!IMPORTANT]
+> In order to run this tutorial, you will need to sign-up to some services in order to get ncessary access keys or authentication details. Go to PreSetup.md & get necessary details.
+>   
+> Make sure `application-dev.properties` under `src/main/resources` has all API keys & connection details as detailed.
+>   
+> [Pre Setup](./PreSetup.md)  
+
 ## Server startup
-- Get additional files:
-    - Add application-dev.properties to "src/main/resources" & make sure it has all API keys
-    - https://1drv.ms/f/c/45c51075dd4f76ae/EsJW7ZDuhSxCoLv5OXtqX-sB9h-Y4a-P-xWGR14VWgd3Dg?e=8FnT3X    (Password will be provided in person during tutorial)
-    - In mcp-servers-config.json at "src/main/resources", change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable.
+- Modify files:
+    - In `mcp-servers-config.json` at `src/main/resources` - 
+        - Windows: Change "command" to the newly installed nodejs directory's npx executable. npx executable is generally in same directory as npm executable. Windows need full path to npx.cmd
+        - MacOS: In MacOs, full path is not required. Just put "npx" in "command".
 - IntelliJ
     - Go to Run > Edit Configurations > Click + icon > Select Application
     - JDK = JDK 17
     - -cp = spring-ai-app.main
     - Main Class = com.itsallbinary.tutorial.ai.spring_ai_app.SpringAiAppApplication
-- Add VM Option to set dev profile:  -Dspring.profiles.active=dev
-- Add environment variable: BRAVE_API_KEY={{API key from application-dev.properties}}
+- Add VM Option to set dev profile:  `-Dspring.profiles.active=dev`
+    - > IMPORTANT: This must be in VM options, not Program Options in IntelliJ
+- Add environment variable: `BRAVE_API_KEY={{API key from application-dev.properties}}`
 
 ## Libraries
 Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
