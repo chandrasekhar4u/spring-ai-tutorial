@@ -50,7 +50,7 @@ C:\Users\ravik>npx -v
 ## Acquire keys & authentication details.
 
 > [!IMPORTANT]
-> In order to run this tutorial, you will need to sign-up to some services in order to get ncessary access keys or authentication details. Go to PreSetup.md & get necessary details.
+> In order to run this tutorial, you will need to sign-up to some services in order to get ncessary access keys or authentication details. Go to `PreSetup.md` & get necessary details.
 >   
 > Make sure `application-dev.properties` under `src/main/resources` has all API keys & connection details as detailed.
 >   
