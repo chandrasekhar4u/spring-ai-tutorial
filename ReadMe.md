@@ -631,6 +631,16 @@ sequenceDiagram
 ### Try on your own
 - Try to integrate any other MCP server. Reference - https://modelcontextprotocol.io/examples  https://github.com/modelcontextprotocol/servers
 
+## Tutorial_11_0_TextToSpeech.java
+
+### Highlights
+- Uses OpenAI text-to-speech model
+
+### Test
+[http://localhost:8080/ai/spring/tutorial/11?userInput=Here is a joke for you ! I told the autonomous agent to "optimize revenue." Now it’s selling my chair on eBay.](http://localhost:8080/ai/spring/tutorial/11?userInput=Here%20is%20a%20joke%20for%20you%20!%20I%20told%20the%20autonomous%20agent%20to%20%22optimize%20revenue.%22%20Now%20it%E2%80%99s%20selling%20my%20chair%20on%20eBay.)
+
+
+
 # References
 https://docs.spring.io/spring-ai/reference/api/chatclient.html
 https://spring.io/blog/2025/01/21/spring-ai-agentic-patterns
