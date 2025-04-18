@@ -70,6 +70,18 @@ C:\Users\ravik>npx -v
     - > IMPORTANT: This must be in VM options, not Program Options in IntelliJ
 - Add environment variable: `BRAVE_API_KEY={{API key from application-dev.properties}}`
 
+## Flags
+
+- Running SpringAI or Langchain4j.
+    - Due to spring bean conflicts, you can run either springai or langchain4j at a time.
+    - Use `tutorial.type` flag in `application.properties` to switch between the two.
+- MongoDB loading data
+    - By default loading of data in mongo is restricted using `tutorial.rag.allow-load-data-to-vector-db` flag in `application.properties`
+    - > IMPORTANT: For runing it first time, change this flag to true & use `/loadData` endpoint in given tutorials to load data into MongoDB.
+- MCP
+    - In case you want to turn-off MCP, then comment out `spring.ai.mcp.client.stdio.servers-configuration` property in `application-springai.properties`
+    - Also change 'tutorial.mcp.enable' flag in `application.properties` to `false`
+
 ## Libraries
 Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-powered applications by providing tools to interact with LLMs (Large Language Models). They offer frameworks to integrate tasks like prompt engineering, function calling, and context management, making it easier to build complex AI workflows without having to manage low-level details.
 
@@ -305,6 +317,10 @@ sequenceDiagram
     SpringApp->>LLM: Combine Data with Prompt
     LLM->>User: Generate Response
 ```
+### Load data into MongoDB (Only needed one time)
+> Make sure to change `tutorial.rag.allow-load-data-to-vector-db` flag as given in Flag section above. This is needed before server startup. Change back to false after one time load to avoid accidental override.  
+[http://localhost:8080/ai/spring/tutorial/3.2/loadData](http://localhost:8080/ai/spring/tutorial/3.2/loadData)
+
 
 ### Test
 [http://localhost:8080/ai/spring/tutorial/3.2?userInput=any plans for planet jupiter](http://localhost:8080/ai/spring/tutorial/3.2?userInput=any%20plans%20for%20planet%20jupiter)      
@@ -379,6 +395,11 @@ sequenceDiagram
     LLM-->>User: Generate Response
 
 ```
+### Load data into MongoDB (Only needed one time)
+> Make sure to change `tutorial.rag.allow-load-data-to-vector-db` flag as given in Flag section above. This is needed before server startup. Change back to false after one time load to avoid accidental override.  
+[http://localhost:8080/ai/spring/tutorial/3.3/loadData](http://localhost:8080/ai/spring/tutorial/3.3/loadData)
+
+
 
 ### Test
 
