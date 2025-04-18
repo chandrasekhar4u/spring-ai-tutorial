@@ -96,8 +96,13 @@ Libraries like **LangChain4j** and **Spring AI** simplify the development of AI-
 https://docs.spring.io/spring-ai/reference/index.html  
 https://docs.langchain4j.dev/intro  
 
+
+## Understand concepts used in tutorial
+
+Refer `Concepts.md` for understanding all the convepts used in these tutorial. Concepts.md will also guide you to respective tutorials for given concepts.
+
 > [!NOTE]
-> [Explain Basic concepts](./Concepts.md#basics)
+> [Understand concepts in easy way](./Concepts.md#basics)
 
 -----
 -----
